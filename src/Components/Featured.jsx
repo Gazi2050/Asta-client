@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const Featured = () => {
@@ -31,7 +32,9 @@ const Featured = () => {
                     }
                 </div>
                 <div className="flex justify-center">
-                    <button className="bg-orange-600 lg:bg-orange-600 border-0 lg:border-0 text-white lg:text-white hover:bg-black btn btn-sm sm:btn-sm md:btn-md lg:btn mt-5 lg:-mt-9">see more</button>
+                    <Link to={'/events'}>
+                        <button className="bg-orange-600 lg:bg-orange-600 border-0 lg:border-0 text-white lg:text-white hover:bg-black btn btn-sm sm:btn-sm md:btn-md lg:btn mt-5 lg:-mt-9">see more</button>
+                    </Link>
                 </div>
             </div>
         </div>
