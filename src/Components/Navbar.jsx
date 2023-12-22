@@ -28,7 +28,7 @@ const Navbar = () => {
                             <li><NavLink to={'/signUp'} onClick={toggleMenu}>SignUp</NavLink></li>
                         </ul>
                     </div>
-                    <Link className="bg-slate-300 border-0 text-4xl text-orange-600 font-semibold p-2">Asta</Link>
+                    <Link className="bg-transparent border-0 text-4xl lg:text-5xl text-orange-500 font-bold p-2">Asta</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 space-x-2">
