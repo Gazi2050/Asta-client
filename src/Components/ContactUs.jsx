@@ -20,7 +20,7 @@ const ContactUs = () => {
                             <button type="button" className="btn hover:bg-black hover:text-white border-0">Submit</button>
                         </form>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29udGFjdCUyMHVzfGVufDB8fDB8fHww" alt="" className="object-cover w-full rounded-md xl:col-span-3 dark:bg-gray-500" />
+                    <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29udGFjdCUyMHVzfGVufDB8fDB8fHww" alt="" className="hidden lg:block object-cover w-full rounded-md xl:col-span-3 dark:bg-gray-500" />
                 </div>
             </section>
         </div>

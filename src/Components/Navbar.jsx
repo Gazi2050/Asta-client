@@ -65,7 +65,6 @@ const Navbar = () => {
                                 </NavLink>
                             ) :
                                 (<>
-                                    <li><NavLink to={'/signUp'} onClick={toggleMenu}>SignUp</NavLink></li>
                                     <li>
                                         <details>
                                             <summary>Collaborate</summary>
@@ -77,6 +76,7 @@ const Navbar = () => {
                                             </ul>
                                         </details>
                                     </li>
+                                    <li><NavLink to={'/signUp'} onClick={toggleMenu}>SignUp</NavLink></li>
                                 </>)}
 
                         </ul>
@@ -91,7 +91,7 @@ const Navbar = () => {
                         {user ?
                             (<li><NavLink to={'/bookings'}>Bookings</NavLink></li>)
                             :
-                            (<><li><NavLink to={'/signUp'}>SignUp</NavLink></li>
+                            (<>
                                 <li>
                                     <details>
                                         <summary>Collaborate</summary>
@@ -100,7 +100,9 @@ const Navbar = () => {
                                             <li><NavLink to={'/photography'}><FaCameraRetro className="text-2xl" /> SignUp as Photographer</NavLink></li>
                                         </ul>
                                     </details>
-                                </li></>)}
+                                </li>
+                                <li><NavLink to={'/signUp'}>SignUp</NavLink></li>
+                            </>)}
                     </ul>
                 </div>
                 <div className="navbar-end">

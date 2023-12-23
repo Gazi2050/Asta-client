@@ -3,8 +3,12 @@ import Banner from "./Banner";
 import AboutUs from "./AboutUs";
 import Featured from "./Featured";
 import ContactUs from "./ContactUs";
+import Collaborate from "./Collaborate";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Home = () => {
+    const { user } = useContext(AuthContext);
     return (
         <div>
             <Helmet>
@@ -13,6 +17,9 @@ const Home = () => {
             <Banner />
             <AboutUs />
             <Featured />
+            {
+                user ? (null) : (<Collaborate />)
+            }
             <ContactUs />
         </div>
     );
