@@ -103,7 +103,7 @@ const LogIn = () => {
                         </button>
                     </div>
 
-                    <p className="mt-8 text-xs font-light text-center text-black"> Don't have an account? <Link to={'/singUp'} className="font-medium text-gray-700 dark:text-gray-200 hover:underline">Create One</Link></p>
+                    <p className="mt-8 text-xs font-light text-center text-black"> Don't have an account? <Link to={'/signUp'} className="font-medium text-gray-700 dark:text-gray-200 hover:underline">Create One</Link></p>
                 </div>
             </div>
             <Toaster />

@@ -8,6 +8,9 @@ import Events from "../Components/Events";
 import SignUp from "../Components/SignUp";
 import LogIn from "../Components/LogIn";
 import ErrorElement from "../Components/ErrorElement";
+import Profile from "../Components/Profile";
+import Bookings from "../Components/Bookings";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -34,6 +37,26 @@ export const router = createBrowserRouter([
             {
                 path: '/logIn',
                 element: <LogIn></LogIn>
+            },
+            {
+                path: '/profile',
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>
+            },
+            {
+                path: '/bookings',
+                element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
+            },
+            {
+                path: '/catering',
+                element: <></>
+            },
+            {
+                path: '/photography',
+                element: <></>
+            },
+            {
+                path: '/users',
+                element: <></>
             },
 
         ]
