@@ -11,6 +11,8 @@ import ErrorElement from "../Components/ErrorElement";
 import Profile from "../Components/Profile";
 import Bookings from "../Components/Bookings";
 import PrivateRoute from "./PrivateRoute";
+import CatererSignUp from "../Components/CatererSignUp";
+import PhotographerSignUp from "../Components/PhotographerSignUp";
 
 export const router = createBrowserRouter([
     {
@@ -48,11 +50,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/catering',
-                element: <></>
+                element: <CatererSignUp></CatererSignUp>
             },
             {
                 path: '/photography',
-                element: <></>
+                element: <PhotographerSignUp></PhotographerSignUp>
             },
             {
                 path: '/users',
