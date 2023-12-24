@@ -151,7 +151,7 @@ const CatererSignUp = () => {
                                     <div className="label">
                                         <span className="label-text">Upload image </span>
                                     </div>
-                                    <input {...register('image', { required: true })} type="file" className="file-input file-input-bordered w-full max-w-xs" name="image" />
+                                    <input {...register('image')} type="file" className="file-input file-input-bordered w-full max-w-xs" name="image" />
                                 </label>
                                 {errors.image?.type === 'required' && <p className="text-red-600 font-medium">Image is required</p>}
                                 <input value={'caterer'} type="text" {...register("role", { required: true })}

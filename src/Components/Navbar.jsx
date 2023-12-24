@@ -6,6 +6,7 @@ import { FaCameraRetro } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { FaCircleUser } from "react-icons/fa6";
+import { FaHotel } from "react-icons/fa";
 const Navbar = () => {
     const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -73,6 +74,8 @@ const Navbar = () => {
                                                     onClick={toggleMenu}><GiCook className="text-4xl" /> SignUp as Caterer</NavLink></li>
                                                 <li><NavLink to={'/photography'}
                                                     onClick={toggleMenu}><FaCameraRetro className="text-2xl" /> SignUp as Photographer</NavLink></li>
+                                                <li><NavLink to={'/hotel'}
+                                                    onClick={toggleMenu}><FaHotel className="text-2xl" /> SignUp as Hotel</NavLink></li>
                                             </ul>
                                         </details>
                                     </li>
@@ -98,6 +101,7 @@ const Navbar = () => {
                                         <ul className="p-2">
                                             <li><NavLink to={'/catering'}><GiCook className="text-4xl" /> SignUp as Caterer</NavLink></li>
                                             <li><NavLink to={'/photography'}><FaCameraRetro className="text-2xl" /> SignUp as Photographer</NavLink></li>
+                                            <li><NavLink to={'/hotel'}><FaHotel className="text-2xl" /> SignUp as Hotel</NavLink></li>
                                         </ul>
                                     </details>
                                 </li>

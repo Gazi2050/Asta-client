@@ -17,9 +17,7 @@ const Home = () => {
             <Banner />
             <AboutUs />
             <Featured />
-            {
-                user ? (null) : (<Collaborate />)
-            }
+            <Collaborate />
             <ContactUs />
         </div>
     );

@@ -6,10 +6,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
-// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
-const PhotographerSignUp = () => {
-
+const HotelSignUp = () => {
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     const [showPassword, setShowPassword] = useState(false);
@@ -25,11 +22,11 @@ const PhotographerSignUp = () => {
                 console.log(newUser);
                 updateUserProfile(data.name)
                     .then(() => {
-                        //create photographer entry in the database
+                        //create caterer entry in the database
                         const userInfo = {
                             name: data.name,
                             email: data.email,
-                            photographerType: data.photographerType,
+                            hotelType: data.hotelType,
                             image: data.image,
                             role: data.role
                         }
@@ -37,8 +34,8 @@ const PhotographerSignUp = () => {
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    console.log('photographer added to the database')
-                                    toast.success('photographer profile created successfully')
+                                    console.log('hotel added to the database')
+                                    toast.success('hotel profile created successfully')
                                     reset();
                                     navigate('/');
                                 }
@@ -64,7 +61,7 @@ const PhotographerSignUp = () => {
         <div>
             <div className="pt-20 bg-base-content">
                 <Helmet>
-                    <title>Asta | Photographer SignUp</title>
+                    <title>Asta | Hotel SignUp</title>
                 </Helmet>
 
                 <div className="">
@@ -74,7 +71,7 @@ const PhotographerSignUp = () => {
                                 <p>Asta</p>
                             </div>
                             <p className="text-center">Create Account</p>
-                            <p className="text-center font-semibold text-orange-600">As a Photographer</p>
+                            <p className="text-center font-semibold text-orange-600">As a Hotel</p>
 
                             <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
                                 <div>
@@ -133,19 +130,19 @@ const PhotographerSignUp = () => {
 
                                 </div>
 
-                                <div className="form-control w-full mt-2">
+                                <div className="form-control w-full my-2">
                                     <label className="label">
-                                        <span className="label-text">Photographer Type</span>
+                                        <span className="label-text">Hotel Type</span>
                                     </label>
-                                    <select {...register('photographerType', { required: true })}
+                                    <select {...register('hotelType', { required: true })}
                                         className="select select-bordered w-full"
-                                        name="photographerType">
-                                        <option value="Regular Photographer" >Regular Photographer</option>
-                                        <option value="Fashion Photographer">Fashion Photographer</option>
-                                        <option value="Event Photographer">Event Photographer</option>
-                                        <option value="Portrait Photographer">Portrait Photographer</option>
+                                        name="hotelType">
+                                        <option value="Economy">Economy</option>
+                                        <option value="Mid-Range" >Mid-Range</option>
+                                        <option value="Upscale">Upscale</option>
+                                        <option value="Luxury">Luxury</option>
                                     </select>
-                                    <span className="text-sm font-bold text-slate-400">Photographer Type is required . Please select it</span>
+                                    <span className="text-sm font-bold text-slate-400">Hotel Type is required . Please select it</span>
                                 </div>
 
                                 <label className="form-control w-full max-w-xs">
@@ -155,8 +152,7 @@ const PhotographerSignUp = () => {
                                     <input {...register('image')} type="file" className="file-input file-input-bordered w-full max-w-xs" name="image" />
                                 </label>
                                 {errors.image?.type === 'required' && <p className="text-red-600 font-medium">Image is required</p>}
-
-                                <input value={'photographer'} type="text" {...register("role", { required: true })}
+                                <input value={'hotel'} type="text" {...register("role", { required: true })}
                                     name="role"
                                     placeholder="role" className="hidden w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" />
                                 <div className="mt-2">
@@ -175,4 +171,4 @@ const PhotographerSignUp = () => {
     );
 };
 
-export default PhotographerSignUp;
+export default HotelSignUp;

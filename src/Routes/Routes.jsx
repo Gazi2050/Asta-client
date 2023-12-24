@@ -13,6 +13,7 @@ import Bookings from "../Components/Bookings";
 import PrivateRoute from "./PrivateRoute";
 import CatererSignUp from "../Components/CatererSignUp";
 import PhotographerSignUp from "../Components/PhotographerSignUp";
+import HotelSignUp from "../Components/HotelSignUp";
 
 export const router = createBrowserRouter([
     {
@@ -30,7 +31,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/events',
-                element: <Events></Events>
+                element: <Events></Events>,
+                loader: () => fetch('http://localhost:5000/events') //
             },
             {
                 path: '/signUp',
@@ -55,6 +57,10 @@ export const router = createBrowserRouter([
             {
                 path: '/photography',
                 element: <PhotographerSignUp></PhotographerSignUp>
+            },
+            {
+                path: '/hotel',
+                element: <HotelSignUp></HotelSignUp>
             },
             {
                 path: '/users',
