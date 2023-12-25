@@ -59,9 +59,9 @@ const Navbar = () => {
                                 <NavLink to={'/profile'} onClick={toggleMenu}>
                                     {user.photoURL ? (
                                         <img className='
-                                        block lg:hidden md:block rounded-full w-14 mr-4 border-2 border-black hover:border-orange-600' src={user.photoURL} alt="User Avatar" />
+                                        block lg:hidden md:hidden rounded-full w-14 mr-4 border-2 border-black hover:border-orange-600' src={user.photoURL} alt="User Avatar" />
                                     ) : (
-                                        <FaCircleUser className='text-4xl mr-4 hidden lg:block md:block' />
+                                        <FaCircleUser className='text-4xl mr-4 block lg:hidden md:hidden' />
                                     )}
                                 </NavLink>
                             ) :

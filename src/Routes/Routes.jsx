@@ -14,7 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import CatererSignUp from "../Components/CatererSignUp";
 import PhotographerSignUp from "../Components/PhotographerSignUp";
 import HotelSignUp from "../Components/HotelSignUp";
-
+import CheckOut from "../Components/CheckOut"
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -33,6 +33,11 @@ export const router = createBrowserRouter([
                 path: '/events',
                 element: <Events></Events>,
                 loader: () => fetch('http://localhost:5000/events') //
+            },
+            {
+                path: '/checkOut/:id',
+                element: <CheckOut></CheckOut>,
+                loader: ({ params }) => fetch(`http://localhost:5000/events/${params.id}`) //
             },
             {
                 path: '/signUp',
