@@ -11,9 +11,8 @@ const EventCard = ({ eventItem }) => {
                         {eventName}
                         <div className="badge bg-orange-600 text-white p-3">$ {eventFee}</div>
                     </h2>
-                    <p>{description}</p>
-                    <Link to={`/checkOut/${_id}`}>
-                        <button className="btn btn-sm md:btn-md lg:btn-md  text-white bg-orange-600 hover:text-orange-600 hover:bg-white">CheckOut</button>
+                    <Link className="w-[10%]" to={`/checkOut/${_id}`}>
+                        <span className="btn btn-sm md:btn-md lg:btn-md  text-white bg-orange-600 hover:text-orange-600 hover:bg-white">CheckOut</span>
                     </Link>
                     <div className="card-actions justify-end">
                         <div className="badge badge-outline p-3">{eventType}</div>

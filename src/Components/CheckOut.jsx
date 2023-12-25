@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 
 
@@ -6,19 +7,22 @@ const CheckOut = () => {
     const { _id, eventName, eventFee, img, description, eventType } = checkout;
     return (
         <div className="pt-20">
-            <h1 className="text-orange-600 text-xl lg:text-4xl md:text-3xl text-center font-bold">CheckOut</h1>
+            <Helmet>
+                <title>Asta | CheckOut {_id}</title>
+            </Helmet>
+            <h1 className="text-orange-600 text-xl lg:text-4xl md:text-3xl text-center font-bold pt-2">CheckOut</h1>
             <div>
                 <section className="bg-white dark:bg-gray-900">
-                    <div className="container px-6 py-10 mx-auto">
+                    <div className="container px-6 pt-2 pb-4 mx-auto">
                         <div className="mt-8 lg:-mx-6 lg:flex lg:items-center">
                             <img className="object-cover w-full lg:mx-6 lg:w-1/2 rounded-xl h-72 lg:h-96" src={img} alt="image" />
 
                             <div className="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
                                 <p className="text-sm text-orange-600 uppercase badge badge-outline">{eventType}</p>
 
-                                <a href="#" className="block mt-4 text-2xl font-semibold text-gray-800 hover:underline dark:text-white">
+                                <p className="block mt-4 text-2xl font-semibold text-gray-800 dark:text-white">
                                     {eventName}
-                                </a>
+                                </p>
 
                                 <p className="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
                                     {description}
@@ -32,7 +36,7 @@ const CheckOut = () => {
                                         <p className="text-sm text-gray-500 dark:text-gray-400">Lead Developer</p>
                                     </div>
                                 </div> */}
-                                <div className="pt-10">
+                                <div className="pt-5">
                                     <p className="text-2xl font-semibold">$ {eventFee}</p>
                                 </div>
                             </div>
