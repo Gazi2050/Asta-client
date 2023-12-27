@@ -15,6 +15,7 @@ import CatererSignUp from "../Components/CatererSignUp";
 import PhotographerSignUp from "../Components/PhotographerSignUp";
 import HotelSignUp from "../Components/HotelSignUp";
 import CheckOut from "../Components/CheckOut"
+import Orders from "../Components/Orders";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
             {
                 path: '/bookings',
                 element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
+            },
+            {
+                path: '/orders',
+                element: <PrivateRoute><Orders></Orders></PrivateRoute>
             },
             {
                 path: '/catering',

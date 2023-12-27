@@ -32,7 +32,7 @@ const LogIn = () => {
                 const errorMessage = error.message;
                 console.log(errorMessage)
                 toast.error(errorMessage);
-                navigate('/singUp');
+                navigate('/signUp');
             })
     }
 

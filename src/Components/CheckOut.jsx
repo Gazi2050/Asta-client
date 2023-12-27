@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet-async";
-import { useLoaderData } from "react-router-dom";
-
+import { useLoaderData, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../Provider/AuthProvider";
 const CheckOut = () => {
     const checkout = useLoaderData();
+    const { user } = useContext(AuthContext)
+    const navigate = useNavigate();
     const { _id, eventName, eventFee, img, description, eventType } = checkout;
     // Placeholder for service providers
     const [serviceProviders, setServiceProviders] = useState([]);
@@ -54,7 +57,6 @@ const CheckOut = () => {
 
     useEffect(() => {
         // Fetch service providers from your API
-        // Replace 'your-api-endpoint' with the actual endpoint
         fetch("http://localhost:5000/users")
             .then((response) => response.json())
             .then((data) => {
@@ -168,30 +170,43 @@ const CheckOut = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const email = user.email;
         const serviceData = {
-            photographer: {
-                category: selectedCategoryPhotographer,
-                type: selectedTypePhotographer,
-                serviceProvider: bookingPhotographer.selectedServiceProvider,
-                serviceFee: 400
-            },
-            caterer: {
-                category: selectedCategoryCaterer,
-                type: selectedTypeCaterer,
-                serviceProvider: bookingCaterer.selectedServiceProvider,
-                serviceFee: 500
-            },
-            hotel: {
-                category: selectedCategoryHotel,
-                type: selectedTypeHotel,
-                serviceProvider: bookingHotel.selectedServiceProvider,
-                serviceFee: 700
-            },
+            category_P: selectedCategoryPhotographer,
+            category_C: selectedCategoryCaterer,
+            category_H: selectedCategoryHotel,
+            type_P: selectedTypePhotographer,
+            type_C: selectedTypeCaterer,
+            type_H: selectedTypeHotel,
+            serviceProvider_P: bookingPhotographer.selectedServiceProvider,
+            serviceProvider_C: bookingCaterer.selectedServiceProvider,
+            serviceProvider_H: bookingHotel.selectedServiceProvider,
+            serviceFee_P: 400,
+            serviceFee_C: 500,
+            serviceFee_H: 700,
         };
 
-        const booking = { _id, eventName, eventFee, img, description, eventType, serviceData };
+        const booking = { email, eventName, eventFee, img, description, eventType, serviceData };
         console.log(booking);
+
         // You can do something with the booking data here
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.insertedId) {
+                    toast.success('Event booked successfully')
+                    navigate('/events');
+                }
+            })
+
     };
 
     return (
@@ -266,7 +281,7 @@ const CheckOut = () => {
                                                 Select Photographer Service Provider
                                             </option>
                                             {filteredProvidersPhotographer.map((provider) => (
-                                                <option key={provider.value} value={provider.value}>
+                                                <option key={provider.value} value={provider.label}>
                                                     {provider.label}
                                                 </option>
                                             ))}
@@ -314,7 +329,7 @@ const CheckOut = () => {
                                                 Select Caterer Service Provider
                                             </option>
                                             {filteredProvidersCaterer.map((provider) => (
-                                                <option key={provider.value} value={provider.value}>
+                                                <option key={provider.value} value={provider.label}>
                                                     {provider.label}
                                                 </option>
                                             ))}
@@ -362,7 +377,7 @@ const CheckOut = () => {
                                                 Select Hotel Service Provider
                                             </option>
                                             {filteredProvidersHotel.map((provider) => (
-                                                <option key={provider.value} value={provider.value}>
+                                                <option key={provider.value} value={provider.label}>
                                                     {provider.label}
                                                 </option>
                                             ))}
@@ -382,6 +397,7 @@ const CheckOut = () => {
                         </div>
                     </div>
                 </section>
+                <Toaster />
             </form>
         </div>
     );

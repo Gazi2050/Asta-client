@@ -8,8 +8,19 @@ import toast, { Toaster } from "react-hot-toast";
 import { FaCircleUser } from "react-icons/fa6";
 import { FaHotel } from "react-icons/fa";
 const Navbar = () => {
-    const [isMenuOpen, setMenuOpen] = useState(false);
+    const WebName = {
+        background: 'linear-gradient(to right,#ea580c,#ef4444,#f59e0b)',
+        WebkitBackgroundClip: 'text',
+        color: 'transparent',
+        fontSize: '45px', // Adjust font size as needed
+        fontWeight: 'bold',
+        padding: '1px 20px', // Adjust padding as needed
+        border: 'none',
+        outline: 'none',
+        textDecoration: 'none',
+    };
 
+    const [isMenuOpen, setMenuOpen] = useState(false);
     const { user, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleLogOut = () => {
@@ -33,7 +44,7 @@ const Navbar = () => {
     };
     return (
         <div>
-            <div className="navbar bg-slate-300 fixed z-10">
+            <div className="navbar bg-slate-200 fixed z-10">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} role="button" className={`btn btn-ghost lg:hidden transition duration-400 ease-in text-2xl ${isMenuOpen ? 'transform rotate-90' : ''
@@ -51,7 +62,10 @@ const Navbar = () => {
                             <li><NavLink to={'/events'} onClick={toggleMenu}>Events</NavLink></li>
                             {
                                 user ?
-                                    (<li><NavLink to={'/bookings'} onClick={toggleMenu}>Bookings</NavLink></li>)
+                                    (<>
+                                        <li><NavLink to={'/bookings'} onClick={toggleMenu}>Bookings</NavLink></li>
+                                        <li><NavLink to={'/orders'} onClick={toggleMenu}>Orders</NavLink></li>
+                                    </>)
                                     :
                                     (null)
                             }
@@ -84,7 +98,7 @@ const Navbar = () => {
 
                         </ul>
                     </div>
-                    <Link className="bg-transparent border-0 text-4xl lg:text-5xl text-orange-500 font-bold p-2">Asta</Link>
+                    <Link style={WebName}>Asta</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 space-x-2">
@@ -92,7 +106,10 @@ const Navbar = () => {
                         <li><NavLink to={'/gallery'}>Gallery</NavLink></li>
                         <li><NavLink to={'/events'}>Events</NavLink></li>
                         {user ?
-                            (<li><NavLink to={'/bookings'}>Bookings</NavLink></li>)
+                            (<>
+                                <li><NavLink to={'/bookings'}>Bookings</NavLink></li>
+                                <li><NavLink to={'/orders'}>Orders</NavLink></li>
+                            </>)
                             :
                             (<>
                                 <li>
