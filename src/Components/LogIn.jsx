@@ -49,7 +49,7 @@ const LogIn = () => {
                     .then(res => {
                         console.log(res.data);
                         toast.success(`Logged in as ${googleUser.displayName}`);
-                        navigate('/')
+                        navigate(from, { replace: true })
                     })
             })
             .catch((error) => {
