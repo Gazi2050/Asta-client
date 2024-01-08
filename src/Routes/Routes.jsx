@@ -16,6 +16,7 @@ import PhotographerSignUp from "../Components/PhotographerSignUp";
 import HotelSignUp from "../Components/HotelSignUp";
 import CheckOut from "../Components/CheckOut"
 import Orders from "../Components/Orders";
+import BookingsDetails from "../Components/BookingsDetails";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -55,6 +56,11 @@ export const router = createBrowserRouter([
             {
                 path: '/bookings',
                 element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
+            },
+            {
+                path: '/bookings/:id',
+                element: <PrivateRoute><BookingsDetails></BookingsDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`) //
             },
             {
                 path: '/orders',
