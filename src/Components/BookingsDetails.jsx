@@ -19,8 +19,8 @@ const BookingsDetails = () => {
                     <img src={img} alt="img" className="w-auto h-60 sm:h-96 dark:bg-gray-500 rounded-lg" />
                     <div className="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-orange-50 dark:bg-gray-900">
                         <div className="space-y-2">
-                            <a rel="noopener noreferrer" href="#" className="inline-block text-2xl font-semibold sm:text-3xl">{eventName}</a>
-                            <p className="text-xs dark:text-gray-400">{eventType}
+                            <p className="text-2xl font-semibold sm:text-3xl">{eventName}</p>
+                            <p className="text-xs dark:text-gray-400 badge">{eventType}
                             </p>
                             <p className="font-bold">email : {email}</p>
 
@@ -29,9 +29,19 @@ const BookingsDetails = () => {
                         </div>
                         <div className="dark:text-gray-100">
                             <h1 className="text-xl font-bold">Service Providers</h1>
-                            <p className="font-medium">Photographer Fee: ${serviceData.serviceFee_P}</p>
-                            <p className="font-medium">Hotel Fee: ${serviceData.serviceFee_H}</p>
-                            <p className="font-medium">Caterer Fee: ${serviceData.serviceFee_C}</p>
+                            <p className="font-medium">Photographer: {serviceData.serviceProvider_P
+                            }</p>
+                            <p className="font-medium">Hotel: {serviceData.serviceProvider_H
+                            }</p>
+                            <p className="font-medium">Caterer: {serviceData.serviceProvider_C}</p>
+                        </div>
+                        <div className="dark:text-gray-100">
+                            <h1 className="text-xl font-bold">Service Types</h1>
+                            <p className="font-medium">Photographer Type: {serviceData.type_P
+                            }</p>
+                            <p className="font-medium">Hotel Type: {serviceData.type_H
+                            }</p>
+                            <p className="font-medium">Caterer Type: {serviceData.type_C}</p>
                         </div>
                         <div className="dark:text-gray-100">
                             <h1 className="text-xl font-bold">Service Fee</h1>
@@ -39,6 +49,7 @@ const BookingsDetails = () => {
                             <p className="font-medium">Photographer Fee: ${serviceData.serviceFee_P}</p>
                             <p className="font-medium">Hotel Fee: ${serviceData.serviceFee_H}</p>
                             <p className="font-medium">Caterer Fee: ${serviceData.serviceFee_C}</p>
+                            <input type="number" />
                         </div>
                     </div>
                 </div>
