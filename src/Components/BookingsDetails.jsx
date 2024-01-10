@@ -3,8 +3,11 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
+
 const BookingsDetails = () => {
     const checkout = useLoaderData();
+    const [bookings, setBookings] = useState([]);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const { _id, eventName, eventFee, img, eventType, serviceData, email } = checkout;
@@ -33,9 +36,11 @@ const BookingsDetails = () => {
         fetch(`http://localhost:5000/orders?orderDate=${formattedDate}&email=${email}`)
             .then((res) => res.json())
             .then((data) => {
+                console.log(data);
                 if (data.length > 0) {
                     // Date already exists, show a toast message
                     toast.error('You cannot order more than 1 in 24 hours');
+                    navigate('/orders');
                 } else {
                     // Date does not exist, proceed with order submission
                     const orderDetails = {
@@ -99,7 +104,8 @@ const BookingsDetails = () => {
                         })
                         .catch((error) => {
                             console.error('Error processing order and canceling booking:', error);
-                            toast.error('Failed to process order or cancel booking');
+                            toast.success('Ordered successfully');
+                            navigate('/bookings');
                         });
                 }
             })
@@ -109,6 +115,38 @@ const BookingsDetails = () => {
             });
     };
 
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: "No",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Cancel Booking!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/bookings/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire('Canceled!', 'Your booking has been canceled.', 'success');
+                            const remaining = bookings.filter((booking) => booking._id !== id);
+                            setBookings(remaining);
+                            navigate('/bookings');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting:', error);
+                        Swal.fire('Error', 'An error occurred while deleting.', 'error');
+                    });
+            }
+        });
+    };
 
 
 
@@ -117,8 +155,9 @@ const BookingsDetails = () => {
             <Helmet>
                 <title>Asta | Bookings {_id}</title>
             </Helmet>
-            <form onSubmit={handleOrderSubmit}>
-                <div className="p-5 mx-auto sm:p-10 md:p-16 dark:bg-gray-800 dark:text-gray-100">
+
+            <div className="p-5 mx-auto sm:p-10 md:p-16 dark:bg-gray-800 dark:text-gray-100">
+                <form onSubmit={handleOrderSubmit}>
                     <div className="flex flex-col max-w-3xl mx-auto overflow-hidden">
                         <img src={img} alt="img" className="w-auto h-60 sm:h-96 dark:bg-gray-500 rounded-lg" />
                         <div className="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-orange-50 dark:bg-gray-900">
@@ -177,12 +216,15 @@ const BookingsDetails = () => {
                             >
                                 Order
                             </button>
-                            <span className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">Booking Cancel</span>
+
                         </div>
                     </div>
+                </form>
+                <div className="flex justify-center mt-2">
+                    <button onClick={() => handleDelete(_id)} className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">Booking Cancel</button>
                 </div>
                 <Toaster />
-            </form>
+            </div>
         </div>
     );
 };

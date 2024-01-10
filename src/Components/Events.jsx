@@ -11,7 +11,7 @@ const Events = () => {
                 <title>Asta | Events</title>
             </Helmet>
             <div>
-                <h1 className="text-orange-600 text-xl lg:text-4xl md:text-3xl text-center font-bold p-10">Explore Our Fitness Classes</h1>
+                <h1 className="text-orange-600 text-xl lg:text-4xl md:text-3xl text-center font-bold p-10">Explore Our Events</h1>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-5">
                 {
