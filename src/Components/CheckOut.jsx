@@ -176,17 +176,18 @@ const CheckOut = () => {
             category_P: selectedCategoryPhotographer,
             category_C: selectedCategoryCaterer,
             category_H: selectedCategoryHotel,
-            type_P: selectedTypePhotographer,
-            type_C: selectedTypeCaterer,
-            type_H: selectedTypeHotel,
-            serviceProvider_P: bookingPhotographer.selectedServiceProvider,
-            serviceProvider_C: bookingCaterer.selectedServiceProvider,
-            serviceProvider_H: bookingHotel.selectedServiceProvider,
+            type_P: selectedTypePhotographer || 'not selected',
+            type_C: selectedTypeCaterer || 'not selected',
+            type_H: selectedTypeHotel || 'not selected',
+            serviceProvider_P: bookingPhotographer.selectedServiceProvider || 'not selected',
+            serviceProvider_C: bookingCaterer.selectedServiceProvider || 'not selected',
+            serviceProvider_H: bookingHotel.selectedServiceProvider || 'not selected',
             // Dynamically set service fee based on whether a service provider is selected
             serviceFee_P: bookingPhotographer.selectedServiceProvider ? 400 : 0,
             serviceFee_C: bookingCaterer.selectedServiceProvider ? 500 : 0,
             serviceFee_H: bookingHotel.selectedServiceProvider ? 700 : 0,
         };
+
 
         const booking = { email, eventName, eventFee, img, description, eventType, serviceData };
         console.log(booking);
@@ -398,7 +399,10 @@ const CheckOut = () => {
                         </div>
                     </div>
                 </section>
-                <Toaster />
+                <Toaster
+                    position="top-right"
+                    reverseOrder={false}
+                />
             </form>
         </div>
     );

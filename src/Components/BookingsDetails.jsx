@@ -260,9 +260,12 @@ const BookingsDetails = () => {
                     </div>
                 </form>
                 <div className="flex justify-center mt-2">
-                    <button onClick={() => handleDelete(_id)} className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">Booking Cancel</button>
+                    <button onClick={() => handleDelete(_id)} className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">Cancel Booking</button>
                 </div>
-                <Toaster />
+                <Toaster
+                    position="top-right"
+                    reverseOrder={false}
+                />
             </div>
         </div>
     );

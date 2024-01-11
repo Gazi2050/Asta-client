@@ -145,7 +145,10 @@ const SignUp = () => {
                     </div>
                 </div>
             </div>
-            <Toaster />
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
 
         </div>
     );

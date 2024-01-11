@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
             {
                 path: '/orders',
                 element: <PrivateRoute><Orders></Orders></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/orders') //
+
             },
             {
                 path: '/orders/:id',
