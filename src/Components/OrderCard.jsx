@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 
 const OrderCard = ({ orderItem }) => {
-    const { _id, eventId, img, eventName, eventType, guests, total, orderDate, orderTime } = orderItem;
+    const { _id, eventId, img, eventName, eventType, guests, total, orderDate, orderTime, eventDate } = orderItem;
     return (
         <div>
             <div className="card w-full lg:h-full md:h-full bg-slate-300 shadow-xl">
@@ -15,6 +15,7 @@ const OrderCard = ({ orderItem }) => {
                     <p><span className="font-semibold">Guest :</span> {guests}</p>
                     <p><span className="font-semibold">Order Date :</span> {orderDate}</p>
                     <p><span className="font-semibold">Order Time :</span> {orderTime}</p>
+                    <p><span className="font-semibold">Event Date :</span> {eventDate}</p>
                     <p className="font-semibold">Total Fee : $ {total}</p>
                     <div className="card-actions justify-end">
                         <Link to={`/orders/${_id}`}>

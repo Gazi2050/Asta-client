@@ -182,9 +182,10 @@ const CheckOut = () => {
             serviceProvider_P: bookingPhotographer.selectedServiceProvider,
             serviceProvider_C: bookingCaterer.selectedServiceProvider,
             serviceProvider_H: bookingHotel.selectedServiceProvider,
-            serviceFee_P: 400,
-            serviceFee_C: 500,
-            serviceFee_H: 700,
+            // Dynamically set service fee based on whether a service provider is selected
+            serviceFee_P: bookingPhotographer.selectedServiceProvider ? 400 : 0,
+            serviceFee_C: bookingCaterer.selectedServiceProvider ? 500 : 0,
+            serviceFee_H: bookingHotel.selectedServiceProvider ? 700 : 0,
         };
 
         const booking = { email, eventName, eventFee, img, description, eventType, serviceData };

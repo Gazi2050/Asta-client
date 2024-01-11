@@ -6,31 +6,57 @@ import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const BookingsDetails = () => {
-    const checkout = useLoaderData();
+    const booking = useLoaderData();
     const [bookings, setBookings] = useState([]);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    const { _id, eventName, eventFee, img, eventType, serviceData, email } = checkout;
+    const { _id, eventName, eventFee, img, eventType, serviceData, email } = booking;
     const [inputValue, setInputValue] = useState(0);
+    const [eventDate, setEventDate] = useState(null);
     const [orderDate, setOrderDate] = useState(null);
 
     const cateringFee = Math.max(0, inputValue * serviceData.serviceFee_C);
     const hotelFee = Math.max(0, Math.ceil(inputValue / 2) * serviceData.serviceFee_H);
     const total = eventFee + serviceData.serviceFee_P + cateringFee + hotelFee;
 
-    const isOrderButtonDisabled = inputValue <= 0;
+    const isOrderButtonDisabled = inputValue <= 0 || !eventDate;
 
     const handleOrderSubmit = (e) => {
         e.preventDefault();
 
+        // Check if the event date is selected
+        if (!eventDate) {
+            toast.error('Please select an event date');
+            return;
+        }
+
         // Get the current date and time
         const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString();
+
+        // Manually format the date as MM/DD/YY
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const year = String(currentDate.getFullYear());
+
+        const formattedDate = `${year}-${month}-${day}`;
         const formattedTime = currentDate.toLocaleTimeString();
 
-        // Update state to store both input and date
+        // Calculate event date as 10 days after the current date
+        const eventDateTime = new Date(currentDate);
+        eventDateTime.setDate(currentDate.getDate() + 10);
+
+        // Check if the selected event date is more than 10 days in the future
+        if (new Date(eventDate) <= eventDateTime) {
+            toast.error('Event date should be at least 11 days from the current date');
+            return;
+        }
+        // Update state to store both input, event date, and order date
         setInputValue((prevInputValue) => Math.max(0, prevInputValue));
-        setOrderDate({ date: formattedDate, time: formattedTime });
+        setEventDate(eventDate);
+        setOrderDate({
+            date: formattedDate,
+            time: formattedTime,
+        });
 
         // Check if the same date already exists in the database
         fetch(`http://localhost:5000/orders?orderDate=${formattedDate}&email=${email}`)
@@ -63,6 +89,7 @@ const BookingsDetails = () => {
                         total: total,
                         orderDate: formattedDate,
                         orderTime: formattedTime,
+                        eventDate: eventDate, // Keep the user-selected event date
                     };
 
                     console.log("Order Details:", orderDetails);
@@ -114,6 +141,9 @@ const BookingsDetails = () => {
                 console.error('Error checking existing orders:', error);
             });
     };
+
+
+
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -200,6 +230,15 @@ const BookingsDetails = () => {
                                     }}
                                 />
                                 <span className="m-2 text-gray-400 font-bold text-sm lg:text-base">Per Person</span>
+                            </div>
+                            <div className="dark:text-gray-100">
+                                <h1 className="text-xl font-bold">Event Date</h1>
+                                <input
+                                    className="bg-gray-50 mt-2 w-1/2 placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+                                    type="date"
+                                    value={eventDate}
+                                    onChange={(e) => setEventDate(e.target.value)}
+                                />
                             </div>
                             <div className="dark:text-gray-100">
                                 <h1 className="text-xl font-bold">Summary</h1>
