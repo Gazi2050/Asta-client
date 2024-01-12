@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-
-
+import { FaUserFriends } from "react-icons/fa";
 const OrderCard = ({ orderItem }) => {
     const { _id, eventId, img, eventName, eventType, guests, total, orderDate, orderTime, eventDate } = orderItem;
     return (
@@ -10,9 +9,11 @@ const OrderCard = ({ orderItem }) => {
                 <div className="card-body">
                     <h2 className="card-title">
                         {eventName}
-                        <div className="badge badge-outline p-3">{eventType}</div>
+                        <div className="badge badge-outline p-3 badge-xs">{eventType}</div>
                     </h2>
-                    <p><span className="font-semibold">Guest :</span> {guests}</p>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <span className="font-semibold mr-1">Guest :</span>{guests}<FaUserFriends className="mx-1 text-xl" />
+                    </div>
                     <p><span className="font-semibold">Order Date :</span> {orderDate}</p>
                     <p><span className="font-semibold">Order Time :</span> {orderTime}</p>
                     <p><span className="font-semibold">Event Date :</span> {eventDate}</p>

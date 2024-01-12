@@ -1,11 +1,48 @@
 import { Helmet } from "react-helmet-async";
-import { useLoaderData } from "react-router-dom";
-
-
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { FaUserFriends } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { useState } from "react";
 const OrderDetails = () => {
     const order = useLoaderData();
     const { _id, img, eventName, eventType, email, photographer, hotel, caterer, photographerType, hotelType, catererType, eventFee, photographerFee, catererFee, hotelFee, guests, total, orderDate, orderTime, eventDate } = order;
     console.log(order);
+    const [orders, setOrders] = useState([]);
+    const navigate = useNavigate();
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: "No",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Cancel Order!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/orders/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire('Canceled!', 'Your order has been canceled.', 'success');
+                            const remaining = orders.filter((order) => order._id !== id);
+                            setOrders(remaining);
+                            navigate('/bookings');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error deleting:', error);
+                        Swal.fire('Error', 'An error occurred while deleting.', 'error');
+                    });
+            }
+        });
+    };
+
     return (
         <div className="pt-20">
             <Helmet>
@@ -25,8 +62,10 @@ const OrderDetails = () => {
                             <p className="max-w-lg font-semibold text-gray-500 dark:text-gray-400 mt-2">
                                 Email : <span className="font-normal">{email}</span>
                             </p>
-                            <p className="max-w-lg font-semibold text-gray-500 dark:text-gray-400 mt-2">
-                                Guests : <span className="font-normal">{guests}</span>
+                            <p className="max-w-lg  text-gray-500 dark:text-gray-400 mt-2">
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <span className="font-semibold mr-1">Guest :</span>{guests}<FaUserFriends className="mx-1 text-xl" />
+                                </div>
                             </p>
                             <p className="max-w-lg font-semibold text-gray-500 dark:text-gray-400 mt-2">
                                 EventDate : <span className="font-normal">{eventDate}</span>
@@ -83,7 +122,7 @@ const OrderDetails = () => {
                             </p>
                             <div className="flex items-center justify-between mt-12 lg:justify-start">
 
-                                <button className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">
+                                <button onClick={() => handleDelete(_id)} className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">
                                     Cancel Order
                                 </button>
                             </div>

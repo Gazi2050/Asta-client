@@ -18,6 +18,7 @@ import CheckOut from "../Components/CheckOut"
 import Orders from "../Components/Orders";
 import BookingsDetails from "../Components/BookingsDetails";
 import OrderDetails from "../Components/OrderDetails";
+import AddEvent from "../Components/AddEvent";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             {
                 path: '/gallery',
                 element: <Gallery></Gallery>
+            },
+            {
+                path: '/addEvent',
+                element: <PrivateRoute><AddEvent></AddEvent></PrivateRoute>,
             },
             {
                 path: '/events',

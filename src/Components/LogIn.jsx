@@ -31,7 +31,7 @@ const LogIn = () => {
             .catch((error) => {
                 const errorMessage = error.message;
                 console.log(errorMessage)
-                toast.error(errorMessage);
+                toast.error('Please signUp first');
                 navigate('/signUp');
             })
     }

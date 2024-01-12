@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { FaCircleUser } from "react-icons/fa6";
 import { FaHotel } from "react-icons/fa";
 const Navbar = () => {
+    const isAdmin = true;
     const WebName = {
         background: 'linear-gradient(to right,#ea580c,#ef4444,#f59e0b)',
         WebkitBackgroundClip: 'text',
@@ -65,6 +66,22 @@ const Navbar = () => {
                                     (<>
                                         <li><NavLink to={'/bookings'} onClick={toggleMenu}>Bookings</NavLink></li>
                                         <li><NavLink to={'/orders'} onClick={toggleMenu}>Orders</NavLink></li>
+                                        {isAdmin ?
+                                            (<li>
+                                                <details>
+                                                    <summary className="font-bold text-orange-600">
+                                                        Admin Panel
+                                                    </summary>
+                                                    <ul className="p-2 bg-base-100 rounded-t-none">
+                                                        <li><NavLink to={'/addEvent'}>Add Events</NavLink></li>
+                                                        <li><NavLink to={''}>All Users</NavLink></li>
+                                                        <li><NavLink to={''}>All Events</NavLink></li>
+                                                        <li><NavLink to={''}>All Bookings</NavLink></li>
+                                                        <li><NavLink to={''}>All Orders</NavLink></li>
+                                                    </ul>
+                                                </details>
+                                            </li>) :
+                                            null}
                                     </>)
                                     :
                                     (null)
@@ -109,6 +126,22 @@ const Navbar = () => {
                             (<>
                                 <li><NavLink to={'/bookings'}>Bookings</NavLink></li>
                                 <li><NavLink to={'/orders'}>Orders</NavLink></li>
+                                {isAdmin ?
+                                    (<li>
+                                        <details>
+                                            <summary className="font-bold text-orange-600">
+                                                Admin Panel
+                                            </summary>
+                                            <ul className="p-2 bg-base-100 rounded-t-none">
+                                                <li><NavLink to={'/addEvent'}>Add Events</NavLink></li>
+                                                <li><NavLink to={''}>All Users</NavLink></li>
+                                                <li><NavLink to={''}>All Events</NavLink></li>
+                                                <li><NavLink to={''}>All Bookings</NavLink></li>
+                                                <li><NavLink to={''}>All Orders</NavLink></li>
+                                            </ul>
+                                        </details>
+                                    </li>) :
+                                    null}
                             </>)
                             :
                             (<>
