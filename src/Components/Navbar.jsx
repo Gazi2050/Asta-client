@@ -74,10 +74,10 @@ const Navbar = () => {
                                                     </summary>
                                                     <ul className="p-2 bg-base-100 rounded-t-none">
                                                         <li><NavLink to={'/addEvent'}>Add Events</NavLink></li>
-                                                        <li><NavLink to={''}>All Users</NavLink></li>
-                                                        <li><NavLink to={''}>All Events</NavLink></li>
-                                                        <li><NavLink to={''}>All Bookings</NavLink></li>
-                                                        <li><NavLink to={''}>All Orders</NavLink></li>
+                                                        <li><NavLink to={'/allUsers'}>All Users</NavLink></li>
+                                                        <li><NavLink to={'/allEvents'}>All Events</NavLink></li>
+                                                        <li><NavLink to={'/allBookings'}>All Bookings</NavLink></li>
+                                                        <li><NavLink to={'/allOrders'}>All Orders</NavLink></li>
                                                     </ul>
                                                 </details>
                                             </li>) :
@@ -134,10 +134,10 @@ const Navbar = () => {
                                             </summary>
                                             <ul className="p-2 bg-base-100 rounded-t-none">
                                                 <li><NavLink to={'/addEvent'}>Add Events</NavLink></li>
-                                                <li><NavLink to={''}>All Users</NavLink></li>
-                                                <li><NavLink to={''}>All Events</NavLink></li>
-                                                <li><NavLink to={''}>All Bookings</NavLink></li>
-                                                <li><NavLink to={''}>All Orders</NavLink></li>
+                                                <li><NavLink to={'/allUsers'}>All Users</NavLink></li>
+                                                <li><NavLink to={'/allEvents'}>All Events</NavLink></li>
+                                                <li><NavLink to={'/allBookings'}>All Bookings</NavLink></li>
+                                                <li><NavLink to={'/allOrders'}>All Orders</NavLink></li>
                                             </ul>
                                         </details>
                                     </li>) :

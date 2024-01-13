@@ -19,6 +19,10 @@ import Orders from "../Components/Orders";
 import BookingsDetails from "../Components/BookingsDetails";
 import OrderDetails from "../Components/OrderDetails";
 import AddEvent from "../Components/AddEvent";
+import AllUsers from "../Components/AllUsers";
+import AllEvents from "../Components/AllEvents";
+import AllBookings from "../Components/AllBookings";
+import AllOrders from "../Components/AllOrders";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -48,6 +52,10 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/events/${params.id}`) //
             },
             {
+                path: '/allEvents',
+                element: <PrivateRoute><AllEvents></AllEvents></PrivateRoute>,
+            },
+            {
                 path: '/signUp',
                 element: <SignUp></SignUp>
             },
@@ -57,7 +65,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/profile',
-                element: <PrivateRoute><Profile></Profile></PrivateRoute>
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>,
+            },
+            {
+                path: '/allUsers',
+                element: <PrivateRoute><AllUsers></AllUsers></PrivateRoute>,
             },
             {
                 path: '/bookings',
@@ -67,6 +79,10 @@ export const router = createBrowserRouter([
                 path: '/bookings/:id',
                 element: <PrivateRoute><BookingsDetails></BookingsDetails></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`) //
+            },
+            {
+                path: '/allBookings',
+                element: <PrivateRoute><AllBookings></AllBookings></PrivateRoute>,
             },
             {
                 path: '/orders',
@@ -79,6 +95,10 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/orders/${params.id}`) //
             },
             {
+                path: '/allOrders',
+                element: <PrivateRoute><AllOrders></AllOrders></PrivateRoute>,
+            },
+            {
                 path: '/catering',
                 element: <CatererSignUp></CatererSignUp>
             },
@@ -89,10 +109,6 @@ export const router = createBrowserRouter([
             {
                 path: '/hotel',
                 element: <HotelSignUp></HotelSignUp>
-            },
-            {
-                path: '/users',
-                element: <></>
             },
 
         ]
