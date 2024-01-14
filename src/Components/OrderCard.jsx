@@ -5,7 +5,7 @@ const OrderCard = ({ orderItem }) => {
     return (
         <div>
             <div className="card w-full lg:h-full md:h-full bg-slate-300 shadow-xl">
-                <figure><img className="lg:h-[270px]" src={img} alt="Shoes" /></figure>
+                <figure><img className="lg:h-[270px] w-full" src={img} alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">
                         {eventName}
