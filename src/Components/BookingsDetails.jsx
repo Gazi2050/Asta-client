@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
@@ -8,7 +7,6 @@ import Swal from "sweetalert2";
 const BookingsDetails = () => {
     const booking = useLoaderData();
     const [bookings, setBookings] = useState([]);
-    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const { _id, eventName, eventFee, img, eventType, serviceData, email } = booking;
     const [inputValue, setInputValue] = useState(0);
@@ -183,7 +181,7 @@ const BookingsDetails = () => {
     return (
         <div className="pt-20">
             <Helmet>
-                <title>Asta | Bookings {_id}</title>
+                <title>Asta | Bookings</title>
             </Helmet>
 
             <div className="p-5 mx-auto sm:p-10 md:p-16 dark:bg-gray-800 dark:text-gray-100">

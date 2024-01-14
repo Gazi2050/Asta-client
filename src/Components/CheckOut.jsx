@@ -57,13 +57,27 @@ const CheckOut = () => {
 
     useEffect(() => {
         // Fetch service providers from your API
-        fetch("http://localhost:5000/users")
+        fetch("http://localhost:5000/users", {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('access-token')}`
+            }
+        })
             .then((response) => response.json())
             .then((data) => {
                 setServiceProviders(data);
             })
             .catch((error) => console.error("Error fetching service providers:", error));
     }, []);
+
+    // const { data: serviceProviders = [], isLoading } = useQuery({
+    //     queryKey: ['users'],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get('/users')
+    //         console.log(res)
+    //         return res
+    //     }
+    // })
+
 
     useEffect(() => {
         // Reset selected type and providers when category changes for photographers
@@ -210,11 +224,17 @@ const CheckOut = () => {
             })
 
     };
-
+    // if (isLoading) {
+    //     return (
+    //         <>
+    //             <h2 className="text-5xl text-green-500">Loading...</h2>
+    //         </>
+    //     )
+    // }
     return (
         <div className="pt-20 pb-10">
             <Helmet>
-                <title>Asta | CheckOut {_id}</title>
+                <title>Asta | CheckOut</title>
             </Helmet>
             <h1 className="text-orange-600 text-xl lg:text-4xl md:text-3xl text-center font-bold pt-2">CheckOut</h1>
             <form>

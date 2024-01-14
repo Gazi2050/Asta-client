@@ -46,7 +46,7 @@ const OrderDetails = () => {
     return (
         <div className="pt-20">
             <Helmet>
-                <title>Asta | Order Details {_id}</title>
+                <title>Asta | Order Details</title>
             </Helmet>
             <section className="bg-white dark:bg-gray-900">
                 <div className="container px-6 py-5 mx-auto lg:-mt-44">

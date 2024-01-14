@@ -7,8 +7,9 @@ import { AuthContext } from "../Provider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 import { FaCircleUser } from "react-icons/fa6";
 import { FaHotel } from "react-icons/fa";
+import useAdmin from "../Hooks/useAdmin";
 const Navbar = () => {
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     const WebName = {
         background: 'linear-gradient(to right,#ea580c,#ef4444,#f59e0b)',
         WebkitBackgroundClip: 'text',

@@ -11,28 +11,40 @@ import Swal from "sweetalert2";
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
     const { data: users = [], refetch } = useQuery({
-        queryKey: ['users'],
+        queryKey: ['allUsers'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/users');
+            const res = await axiosSecure.get('/allUsers');
             return res.data;
         }
     })
 
     const handleMakeAdmin = user => {
-        axiosSecure.patch(`/users/admin/${user._id}`)
-            .then(res => {
-                console.log(res.data)
-                if (res.data.modifiedCount > 0) {
-                    refetch();
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${user.name} is an Admin Now!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, do it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.patch(`/users/admin/${user._id}`)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.modifiedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                icon: "success",
+                                title: `${user.name} is an Admin Now!`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    })
+            }
+        })
+
     }
 
 

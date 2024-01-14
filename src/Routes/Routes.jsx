@@ -23,7 +23,9 @@ import AllUsers from "../Components/AllUsers";
 import AllEvents from "../Components/AllEvents";
 import AllBookings from "../Components/AllBookings";
 import AllOrders from "../Components/AllOrders";
+
 export const router = createBrowserRouter([
+
     {
         path: "/",
         errorElement: <ErrorElement></ErrorElement>,
@@ -38,10 +40,6 @@ export const router = createBrowserRouter([
                 element: <Gallery></Gallery>
             },
             {
-                path: '/addEvent',
-                element: <PrivateRoute><AddEvent></AddEvent></PrivateRoute>,
-            },
-            {
                 path: '/events',
                 element: <Events></Events>,
                 loader: () => fetch('http://localhost:5000/events') //
@@ -50,10 +48,6 @@ export const router = createBrowserRouter([
                 path: '/checkOut/:id',
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/events/${params.id}`) //
-            },
-            {
-                path: '/allEvents',
-                element: <PrivateRoute><AllEvents></AllEvents></PrivateRoute>,
             },
             {
                 path: '/signUp',
@@ -68,21 +62,17 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute><Profile></Profile></PrivateRoute>,
             },
             {
-                path: '/allUsers',
-                element: <PrivateRoute><AllUsers></AllUsers></PrivateRoute>,
-            },
-            {
                 path: '/bookings',
                 element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
             },
             {
                 path: '/bookings/:id',
                 element: <PrivateRoute><BookingsDetails></BookingsDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`) //
-            },
-            {
-                path: '/allBookings',
-                element: <PrivateRoute><AllBookings></AllBookings></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+                }) //
             },
             {
                 path: '/orders',
@@ -92,11 +82,11 @@ export const router = createBrowserRouter([
             {
                 path: '/orders/:id',
                 element: <PrivateRoute><OrderDetails></OrderDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/orders/${params.id}`) //
-            },
-            {
-                path: '/allOrders',
-                element: <PrivateRoute><AllOrders></AllOrders></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/orders/${params.id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+                }) //
             },
             {
                 path: '/catering',
@@ -110,7 +100,27 @@ export const router = createBrowserRouter([
                 path: '/hotel',
                 element: <HotelSignUp></HotelSignUp>
             },
-
+            //admin routes
+            {
+                path: '/allUsers',
+                element: <PrivateRoute><AllUsers></AllUsers></PrivateRoute>,
+            },
+            {
+                path: '/addEvent',
+                element: <PrivateRoute><AddEvent></AddEvent></PrivateRoute>,
+            },
+            {
+                path: '/allEvents',
+                element: <PrivateRoute><AllEvents></AllEvents></PrivateRoute>,
+            },
+            {
+                path: '/allBookings',
+                element: <PrivateRoute><AllBookings></AllBookings></PrivateRoute>,
+            },
+            {
+                path: '/allOrders',
+                element: <PrivateRoute><AllOrders></AllOrders></PrivateRoute>,
+            },
         ]
     },
 ]);
