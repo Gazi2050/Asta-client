@@ -25,6 +25,7 @@ import AllBookings from "../Components/AllBookings";
 import AllOrders from "../Components/AllOrders";
 import AllBookingsDetails from "../Components/AllBookingsDetails";
 import AllOrdersDetails from "../Components/Allordersdetails";
+import Payment from "../Components/Payment";
 
 export const router = createBrowserRouter([
 
@@ -101,6 +102,10 @@ export const router = createBrowserRouter([
             {
                 path: '/hotel',
                 element: <HotelSignUp></HotelSignUp>
+            },
+            {
+                path: '/payment',
+                element: <Payment></Payment>
             },
             //admin routes
             {

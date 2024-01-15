@@ -19,6 +19,7 @@ const BookingsDetails = () => {
 
     const isOrderButtonDisabled = inputValue <= 0 || !eventDate;
 
+
     const handleOrderSubmit = (e) => {
         e.preventDefault();
 
@@ -48,6 +49,7 @@ const BookingsDetails = () => {
             toast.error('Event date should be at least 11 days from the current date');
             return;
         }
+
         // Update state to store both input, event date, and order date
         setInputValue((prevInputValue) => Math.max(0, prevInputValue));
         setEventDate(eventDate);
@@ -65,85 +67,90 @@ const BookingsDetails = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                if (data.length > 0) {
-                    // Date already exists, show a toast message
-                    toast.error('You cannot order more than 1 in 24 hours');
+
+                // Check if any orders exist for the same date and email
+                const existingOrderForDateAndEmail = data.find(order => order.email === email && order.orderDate === formattedDate);
+
+                // Check if an order was found
+                if (existingOrderForDateAndEmail) {
+                    // User has already ordered on the same date, show a toast message
+                    toast.error('You cannot order more than once in a day');
                     navigate('/orders');
-                } else {
-                    // Date does not exist, proceed with order submission
-                    const orderDetails = {
-                        eventId: _id,
-                        img: img,
-                        eventName: eventName,
-                        eventType: eventType,
-                        email: email,
-                        photographer: serviceData.serviceProvider_P,
-                        hotel: serviceData.serviceProvider_H,
-                        caterer: serviceData.serviceProvider_C,
-                        photographerType: serviceData.type_P,
-                        hotelType: serviceData.type_H,
-                        catererType: serviceData.type_C,
-                        eventFee: eventFee,
-                        photographerFee: serviceData.serviceFee_P,
-                        catererFee: cateringFee,
-                        hotelFee: hotelFee,
-                        guests: inputValue,
-                        total: total,
-                        orderDate: formattedDate,
-                        orderTime: formattedTime,
-                        eventDate: eventDate, // Keep the user-selected event date
-                    };
-
-                    console.log("Order Details:", orderDetails);
-
-                    // Perform both POST and DELETE requests concurrently
-                    Promise.all([
-                        // POST request to add the order
-                        fetch('http://localhost:5000/orders', {
-                            method: 'POST',
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify(orderDetails)
-                        }),
-                        // DELETE request to remove the booking
-                        fetch(`http://localhost:5000/bookings/${_id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                    ])
-                        .then(([orderRes, cancelRes]) => {
-                            // Check the response of both requests
-                            if (orderRes.ok && cancelRes.ok) {
-                                return Promise.all([orderRes.json(), cancelRes.json()]);
-                            } else {
-                                throw new Error('Failed to process order or cancel booking');
-                            }
-                        })
-                        .then(([orderData, cancelData]) => {
-                            // Check the data returned from both requests
-                            if (orderData.insertedId && cancelData.success) {
-                                toast.success('Ordered successfully and booking canceled');
-                                navigate('/bookings');
-                            } else {
-                                throw new Error('Failed to process order or cancel booking');
-                            }
-                        })
-                        .catch((error) => {
-                            console.error('Error processing order and canceling booking:', error);
-                            toast.success('Ordered successfully');
-                            navigate('/bookings');
-                        });
+                    return;
                 }
+
+                // Date does not exist or user is allowed to order, proceed with order submission
+                const orderDetails = {
+                    eventId: _id,
+                    img: img,
+                    eventName: eventName,
+                    eventType: eventType,
+                    email: email,
+                    photographer: serviceData.serviceProvider_P,
+                    hotel: serviceData.serviceProvider_H,
+                    caterer: serviceData.serviceProvider_C,
+                    photographerType: serviceData.type_P,
+                    hotelType: serviceData.type_H,
+                    catererType: serviceData.type_C,
+                    eventFee: eventFee,
+                    photographerFee: serviceData.serviceFee_P,
+                    catererFee: cateringFee,
+                    hotelFee: hotelFee,
+                    guests: inputValue,
+                    total: total,
+                    orderDate: formattedDate,
+                    orderTime: formattedTime,
+                    eventDate: eventDate, // Keep the user-selected event date
+                };
+
+                console.log("Order Details:", orderDetails);
+
+                // Perform both POST and DELETE requests concurrently
+                Promise.all([
+                    // POST request to add the order
+                    fetch('http://localhost:5000/orders', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(orderDetails)
+                    }),
+                    // DELETE request to remove the booking
+                    fetch(`http://localhost:5000/bookings/${_id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                ])
+                    .then(([orderRes, cancelRes]) => {
+                        // Check the response of both requests
+                        if (orderRes.ok && cancelRes.ok) {
+                            return Promise.all([orderRes.json(), cancelRes.json()]);
+                        } else {
+                            throw new Error('Failed to process order or cancel booking');
+                        }
+                    })
+                    .then(([orderData, cancelData]) => {
+                        // Check the data returned from both requests
+                        if (orderData.insertedId && cancelData.success) {
+                            toast.success('Ordered successfully and booking canceled');
+                            navigate('/bookings');
+                        } else {
+                            throw new Error('Failed to process order or cancel booking');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error processing order and canceling booking:', error);
+                        toast.success('Ordered successfully');
+                        navigate('/bookings');
+                    });
             })
             .catch((error) => {
                 // Handle error fetching data from the server
                 console.error('Error checking existing orders:', error);
             });
     };
-
 
 
 
