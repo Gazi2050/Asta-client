@@ -6,7 +6,7 @@ const BookingsCard = ({ booking }) => {
     return (
         <div>
             <div className="card card-side bg-orange-100 shadow-xl my-5 h-56">
-                <figure><img className=" hidden lg:block" src={img} alt="Movie" /></figure>
+                <figure><img className=" hidden lg:block w-[500px]" src={img} alt="Movie" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{eventName}</h2>
                     <div className="badge badge-outline">{eventType}</div>

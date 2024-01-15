@@ -23,6 +23,8 @@ import AllUsers from "../Components/AllUsers";
 import AllEvents from "../Components/AllEvents";
 import AllBookings from "../Components/AllBookings";
 import AllOrders from "../Components/AllOrders";
+import AllBookingsDetails from "../Components/AllBookingsDetails";
+import AllOrdersDetails from "../Components/Allordersdetails";
 
 export const router = createBrowserRouter([
 
@@ -118,8 +120,26 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute><AllBookings></AllBookings></PrivateRoute>,
             },
             {
+                path: '/allBookings/:id',
+                element: <PrivateRoute><AllBookingsDetails></AllBookingsDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/allBookings/${params.id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+                }) //
+            },
+            {
                 path: '/allOrders',
                 element: <PrivateRoute><AllOrders></AllOrders></PrivateRoute>,
+            },
+            {
+                path: '/allOrders/:id',
+                element: <PrivateRoute><AllOrdersDetails></AllOrdersDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/allOrders/${params.id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+                }) //
             },
         ]
     },

@@ -9,7 +9,7 @@ const BookingsDetails = () => {
     const [bookings, setBookings] = useState([]);
     const navigate = useNavigate();
     const { _id, eventName, eventFee, img, eventType, serviceData, email } = booking;
-    const [inputValue, setInputValue] = useState();
+    const [inputValue, setInputValue] = useState(0);
     const [eventDate, setEventDate] = useState(null);
     const [orderDate, setOrderDate] = useState(null);
 
@@ -274,7 +274,8 @@ const BookingsDetails = () => {
 };
 
 export default BookingsDetails;
-///////////////////////////////////////////////////////////////////////
+
+/////////////////////Date-fns///////////////////////////////////////
 
 // import { useState } from "react";
 // import { useLoaderData, useNavigate } from "react-router-dom";
