@@ -26,6 +26,7 @@ import AllOrders from "../Components/AllOrders";
 import AllBookingsDetails from "../Components/AllBookingsDetails";
 import AllOrdersDetails from "../Components/Allordersdetails";
 import Payment from "../Components/Payment";
+import PaymentHistory from "../Components/PaymentHistory";
 
 export const router = createBrowserRouter([
 
@@ -106,6 +107,10 @@ export const router = createBrowserRouter([
             {
                 path: '/payment',
                 element: <Payment></Payment>
+            },
+            {
+                path: '/paymentHistory',
+                element: <PaymentHistory></PaymentHistory>
             },
             //admin routes
             {

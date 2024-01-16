@@ -6,7 +6,6 @@ import CheckoutForm from "./CheckoutForm";
 const Payment = () => {
     const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
-
     return (
         <div className="py-24">
             <Helmet>

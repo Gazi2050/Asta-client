@@ -67,6 +67,7 @@ const Navbar = () => {
                                     (<>
                                         <li><NavLink to={'/bookings'} onClick={toggleMenu}>Bookings</NavLink></li>
                                         <li><NavLink to={'/orders'} onClick={toggleMenu}>Orders</NavLink></li>
+                                        <li><NavLink to={'/paymentHistory'} onClick={toggleMenu}>Payment History</NavLink></li>
                                         {isAdmin ?
                                             (<li>
                                                 <details>
@@ -127,6 +128,7 @@ const Navbar = () => {
                             (<>
                                 <li><NavLink to={'/bookings'}>Bookings</NavLink></li>
                                 <li><NavLink to={'/orders'}>Orders</NavLink></li>
+                                <li><NavLink to={'/paymentHistory'}>Payment History</NavLink></li>
                                 {isAdmin ?
                                     (<li>
                                         <details>

@@ -6,7 +6,7 @@ import useAuth from "./useAuth";
 const useOrder = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
-    const { refetch, data: order = [] } = useQuery({
+    const { data: order = [], refetch, } = useQuery({
         queryKey: ['order', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/orders?email=${user.email}`);
