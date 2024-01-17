@@ -9,13 +9,13 @@ const EventCard = ({ eventItem }) => {
                 <div className="card-body">
                     <h2 className="card-title">
                         {eventName}
-                        <div className="badge bg-orange-600 text-white p-3">$ {eventFee}</div>
+                        <div className="badge badge-outline p-3">{eventType}</div>
                     </h2>
                     <Link className="w-[10%]" to={`/checkOut/${_id}`}>
                         <span className="btn btn-sm md:btn-md lg:btn-md  text-white bg-orange-600 hover:text-orange-600 hover:bg-white">CheckOut</span>
                     </Link>
                     <div className="card-actions justify-end">
-                        <div className="badge badge-outline p-3">{eventType}</div>
+                        <div className="badge bg-orange-600 text-white p-3 font-semibold">$ {eventFee}</div>
                     </div>
                 </div>
             </div>

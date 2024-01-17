@@ -10,7 +10,7 @@ import { ImBin } from "react-icons/im";
 import Swal from "sweetalert2";
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], refetch, isError, isLoading } = useQuery({
         queryKey: ['allUsers'],
         queryFn: async () => {
             const res = await axiosSecure.get('/allUsers');
@@ -31,7 +31,7 @@ const AllUsers = () => {
             if (result.isConfirmed) {
                 axiosSecure.patch(`/users/admin/${user._id}`)
                     .then(res => {
-                        console.log(res.data)
+                        //console.log(res.data)
                         if (res.data.modifiedCount > 0) {
                             refetch();
                             Swal.fire({
@@ -97,7 +97,20 @@ const AllUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row  */}
+                        {isLoading && (
+                            <tr>
+                                <td colSpan="4" className="text-center" style={{ fontSize: '18px', fontWeight: 'bold', color: 'orange', animation: 'pulse 1.5s infinite' }}>
+                                    Loading...
+                                </td>
+                            </tr>
+                        )}
+                        {isError && (
+                            <tr>
+                                <td colSpan="4" className="text-red-600 font-bold text-center">
+                                    Error fetching users
+                                </td>
+                            </tr>
+                        )}
                         {
                             users.map((user, index) => <tr key={user._id} className="bg-base-200 font-semibold">
                                 <th>{index + 1}</th>

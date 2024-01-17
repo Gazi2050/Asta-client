@@ -19,18 +19,18 @@ const LogIn = () => {
         const email = form.email.value;
         const password = form.password.value;
         const newUser = { email, password };
-        console.log(newUser)
+        //console.log(newUser)
 
         signIn(email, password)
             .then(result => {
                 const loggedInUser = result.user;
-                console.log(loggedInUser)
+                //console.log(loggedInUser)
                 toast.success('User logged in successfully');
                 navigate(from, { replace: true });
             })
             .catch((error) => {
                 const errorMessage = error.message;
-                console.log(errorMessage)
+                //console.log(errorMessage)
                 toast.error('Please signUp first');
                 navigate('/signUp');
             })
@@ -40,21 +40,21 @@ const LogIn = () => {
         googleSignIn()
             .then(result => {
                 const googleUser = result.user;
-                console.log(googleUser);
+                //console.log(googleUser);
                 const userInfo = {
                     email: googleUser?.email,
                     name: googleUser?.displayName
                 }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data);
+                        //console.log(res.data);
                         toast.success(`Logged in as ${googleUser.displayName}`);
                         navigate(from, { replace: true })
                     })
             })
             .catch((error) => {
                 const errorMessage = error.message;
-                console.log(errorMessage)
+                //console.log(errorMessage)
             })
     }
 

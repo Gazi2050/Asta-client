@@ -15,13 +15,13 @@ const CatererSignUp = () => {
     const { createUser, updateUserProfile, loading } = useContext(AuthContext);
     const navigate = useNavigate();
     const onSubmit = (data) => {
-        console.log(data)
+        //console.log(data)
 
         createUser(data.email, data.password)
             .then(result => {
                 const newUser = result.user;
                 // toast.success('user signUp successfully')
-                console.log(newUser);
+                //console.log(newUser);
                 updateUserProfile(data.name)
                     .then(() => {
                         //create caterer entry in the database
@@ -32,20 +32,20 @@ const CatererSignUp = () => {
                             image: data.image,
                             role: data.role
                         }
-                        console.log(userInfo)
+                        //console.log(userInfo)
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    console.log('caterer added to the database')
+                                    //console.log('caterer added to the database')
                                     toast.success('caterer profile created successfully')
                                     reset();
                                     navigate('/');
                                 }
                             })
-                        // console.log('user profile updated')
+                        // //console.log('user profile updated')
                     })
                     .catch(error => {
-                        console.log(error)
+                        //console.log(error)
                         toast.error(error)
                     }
                     )
@@ -53,7 +53,7 @@ const CatererSignUp = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode)
+                //console.log(errorCode)
                 toast.error(errorMessage)
             });
     }

@@ -27,6 +27,8 @@ import AllBookingsDetails from "../Components/AllBookingsDetails";
 import AllOrdersDetails from "../Components/Allordersdetails";
 import Payment from "../Components/Payment";
 import PaymentHistory from "../Components/PaymentHistory";
+import AllPaymentHistory from "../Components/AllPaymentHistory";
+import AllpaymentDetails from "../Components/AllpaymentDetails";
 
 export const router = createBrowserRouter([
 
@@ -46,12 +48,12 @@ export const router = createBrowserRouter([
             {
                 path: '/events',
                 element: <Events></Events>,
-                loader: () => fetch('http://localhost:5000/events') //
+                loader: () => fetch('https://asta-server-three.vercel.app/events') //
             },
             {
                 path: '/checkOut/:id',
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/events/${params.id}`) //
+                loader: ({ params }) => fetch(`https://asta-server-three.vercel.app/events/${params.id}`) //
             },
             {
                 path: '/signUp',
@@ -72,7 +74,7 @@ export const router = createBrowserRouter([
             {
                 path: '/bookings/:id',
                 element: <PrivateRoute><BookingsDetails></BookingsDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`, {
+                loader: ({ params }) => fetch(`https://asta-server-three.vercel.app/bookings/${params.id}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('access-token')}`
                     }
@@ -86,7 +88,7 @@ export const router = createBrowserRouter([
             {
                 path: '/orders/:id',
                 element: <PrivateRoute><OrderDetails></OrderDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/orders/${params.id}`, {
+                loader: ({ params }) => fetch(`https://asta-server-three.vercel.app/orders/${params.id}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('access-token')}`
                     }
@@ -132,7 +134,7 @@ export const router = createBrowserRouter([
             {
                 path: '/allBookings/:id',
                 element: <PrivateRoute><AllBookingsDetails></AllBookingsDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/allBookings/${params.id}`, {
+                loader: ({ params }) => fetch(`https://asta-server-three.vercel.app/allBookings/${params.id}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('access-token')}`
                     }
@@ -145,7 +147,20 @@ export const router = createBrowserRouter([
             {
                 path: '/allOrders/:id',
                 element: <PrivateRoute><AllOrdersDetails></AllOrdersDetails></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/allOrders/${params.id}`, {
+                loader: ({ params }) => fetch(`https://asta-server-three.vercel.app/allOrders/${params.id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+                }) //
+            },
+            {
+                path: '/allPayments',
+                element: <PrivateRoute><AllPaymentHistory></AllPaymentHistory></PrivateRoute>,
+            },
+            {
+                path: '/allPayments/:id',
+                element: <PrivateRoute><AllpaymentDetails></AllpaymentDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`https://asta-server-three.vercel.app/allPayments/${params.id}`, {
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('access-token')}`
                     }

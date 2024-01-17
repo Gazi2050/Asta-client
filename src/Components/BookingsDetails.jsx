@@ -59,14 +59,14 @@ const BookingsDetails = () => {
         });
 
         // Check if the same date already exists in the database
-        fetch(`http://localhost:5000/orders?orderDate=${formattedDate}&email=${email}`, {
+        fetch(`https://asta-server-three.vercel.app/orders?orderDate=${formattedDate}&email=${email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('access-token')}`
             }
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                //console.log(data);
 
                 // Check if any orders exist for the same date and email
                 const existingOrderForDateAndEmail = data.find(order => order.email === email && order.orderDate === formattedDate);
@@ -103,12 +103,12 @@ const BookingsDetails = () => {
                     eventDate: eventDate, // Keep the user-selected event date
                 };
 
-                console.log("Order Details:", orderDetails);
+                //console.log("Order Details:", orderDetails);
 
                 // Perform both POST and DELETE requests concurrently
                 Promise.all([
                     // POST request to add the order
-                    fetch('http://localhost:5000/orders', {
+                    fetch('https://asta-server-three.vercel.app/orders', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -116,7 +116,7 @@ const BookingsDetails = () => {
                         body: JSON.stringify(orderDetails)
                     }),
                     // DELETE request to remove the booking
-                    fetch(`http://localhost:5000/bookings/${_id}`, {
+                    fetch(`https://asta-server-three.vercel.app/bookings/${_id}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ const BookingsDetails = () => {
                     .catch((error) => {
                         console.error('Error processing order and canceling booking:', error);
                         toast.success('Ordered successfully');
-                        navigate('/bookings');
+                        navigate('/orders');
                     });
             })
             .catch((error) => {
@@ -166,12 +166,12 @@ const BookingsDetails = () => {
             confirmButtonText: 'Cancel Booking!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/bookings/${id}`, {
+                fetch(`https://asta-server-three.vercel.app/bookings/${id}`, {
                     method: 'DELETE'
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
+                        //console.log(data);
                         if (data.deletedCount > 0) {
                             Swal.fire('Canceled!', 'Your booking has been canceled.', 'success');
                             const remaining = bookings.filter((booking) => booking._id !== id);
@@ -329,14 +329,14 @@ export default BookingsDetails;
 //             time: formattedTime,
 //         });
 
-//         fetch(`http://localhost:5000/orders?orderDate=${formattedDate}&email=${email}`, {
+//         fetch(`https://asta-server-three.vercel.app/orders?orderDate=${formattedDate}&email=${email}`, {
 //             headers: {
 //                 authorization: `Bearer ${localStorage.getItem('access-token')}`
 //             }
 //         })
 //             .then((res) => res.json())
 //             .then((data) => {
-//                 console.log(data);
+//                 //console.log(data);
 //                 if (data.length > 0) {
 //                     toast.error('You cannot order more than 1 in 24 hours');
 //                     navigate('/orders');
@@ -364,17 +364,17 @@ export default BookingsDetails;
 //                         eventDate: eventDate,
 //                     };
 
-//                     console.log("Order Details:", orderDetails);
+//                     //console.log("Order Details:", orderDetails);
 
 //                     Promise.all([
-//                         fetch('http://localhost:5000/orders', {
+//                         fetch('https://asta-server-three.vercel.app/orders', {
 //                             method: 'POST',
 //                             headers: {
 //                                 'content-type': 'application/json'
 //                             },
 //                             body: JSON.stringify(orderDetails)
 //                         }),
-//                         fetch(`http://localhost:5000/bookings/${_id}`, {
+//                         fetch(`https://asta-server-three.vercel.app/bookings/${_id}`, {
 //                             method: 'DELETE',
 //                             headers: {
 //                                 'Content-Type': 'application/json',
@@ -420,12 +420,12 @@ export default BookingsDetails;
 //             confirmButtonText: 'Cancel Booking!'
 //         }).then((result) => {
 //             if (result.isConfirmed) {
-//                 fetch(`http://localhost:5000/bookings/${id}`, {
+//                 fetch(`https://asta-server-three.vercel.app/bookings/${id}`, {
 //                     method: 'DELETE'
 //                 })
 //                     .then((res) => res.json())
 //                     .then((data) => {
-//                         console.log(data);
+//                         //console.log(data);
 //                         if (data.deletedCount > 0) {
 //                             Swal.fire('Canceled!', 'Your booking has been canceled.', 'success');
 //                             const remaining = bookings.filter((booking) => booking._id !== id);

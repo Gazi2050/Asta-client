@@ -6,7 +6,7 @@ import { useState } from "react";
 const OrderDetails = () => {
     const order = useLoaderData();
     const { _id, img, eventName, eventType, email, photographer, hotel, caterer, photographerType, hotelType, catererType, eventFee, photographerFee, catererFee, hotelFee, guests, total, orderDate, orderTime, eventDate } = order;
-    console.log(order);
+    //console.log(order);
     const [orders, setOrders] = useState([]);
     const navigate = useNavigate();
 
@@ -22,12 +22,12 @@ const OrderDetails = () => {
             confirmButtonText: 'Cancel Order!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/orders/${id}`, {
+                fetch(`https://asta-server-three.vercel.app/orders/${id}`, {
                     method: 'DELETE'
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
+                        //console.log(data);
                         if (data.deletedCount > 0) {
                             Swal.fire('Canceled!', 'Your order has been canceled.', 'success');
                             const remaining = orders.filter((order) => order._id !== id);

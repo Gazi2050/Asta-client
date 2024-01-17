@@ -19,12 +19,12 @@ const CheckoutForm = () => {
 
 
     const totalFee = order.reduce((acc, order) => acc + order.total, 0);
-    console.log(totalFee);
+    //console.log(totalFee);
     useEffect(() => {
         if (totalFee > 0) {
             axiosSecure.post('/create-payment-intent', { fee: totalFee })
                 .then(res => {
-                    console.log(res.data.clientSecret);
+                    //console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
@@ -51,11 +51,11 @@ const CheckoutForm = () => {
         })
 
         if (error) {
-            console.log('payment error', error);
+            //console.log('payment error', error);
             setError(error.message);
         }
         else {
-            console.log('payment method', paymentMethod)
+            //console.log('payment method', paymentMethod)
             setError('');
         }
 
@@ -72,13 +72,13 @@ const CheckoutForm = () => {
         })
 
         if (confirmError) {
-            console.log('confirm error')
+            //console.log('confirm error')
         }
 
         else {
-            console.log('payment intent', paymentIntent)
+            //console.log('payment intent', paymentIntent)
             if (paymentIntent.status === 'succeeded') {
-                console.log('transaction id', paymentIntent.id);
+                //console.log('transaction id', paymentIntent.id);
                 setTransactionId(paymentIntent.id);
 
                 // now save the payment in the database
@@ -93,14 +93,14 @@ const CheckoutForm = () => {
                 }
 
                 const res = await axiosSecure.post('/payments', payment);
-                console.log('payment saved', res.data);
-                refetch();
+                //console.log('payment saved', res.data);
                 if (res.data?.paymentResult?.insertedId) {
                     Swal.fire({
                         title: "Payment Successful",
                         text: "You have successfully paid the order fee.",
                         icon: "success"
                     });
+                    refetch();
                     navigate('/paymentHistory')
                 }
 

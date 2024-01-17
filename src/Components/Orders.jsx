@@ -8,7 +8,7 @@ const Orders = () => {
     const { user } = useContext(AuthContext);
     const [orders, setOrders] = useState([]);
 
-    const url = `http://localhost:5000/orders?email=${user?.email}`;
+    const url = `https://asta-server-three.vercel.app/orders?email=${user?.email}`;
 
     useEffect(() => {
         fetch(url, {

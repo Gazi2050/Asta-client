@@ -15,7 +15,7 @@ const AddEvent = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const onSubmit = async (data) => {
-        console.log(data);
+        //console.log(data);
         const imageFile = { image: data.img[0] }
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
@@ -32,7 +32,7 @@ const AddEvent = () => {
                 img: res.data.data.display_url
             }
             const eventRes = await axiosSecure.post('/events', eventItem);
-            console.log(eventRes.data)
+            //console.log(eventRes.data)
             if (eventRes.data.insertedId) {
                 reset();
                 toast.success('Event added successfully');
@@ -41,7 +41,7 @@ const AddEvent = () => {
                 toast.error('Failed to add event. Please try again.');
             }
         }
-        console.log(res.data);
+        //console.log(res.data);
     }
     return (
         <div className="pt-20">
@@ -60,6 +60,7 @@ const AddEvent = () => {
                                 <input
                                     required
                                     {...register('eventName', { required: true })}
+                                    placeholder="Event Name"
                                     type="text"
                                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
                             </div>
@@ -68,6 +69,7 @@ const AddEvent = () => {
                                 <input
                                     required
                                     {...register('eventType', { required: true })}
+                                    placeholder="Event Type"
                                     type="text"
                                     list="typeOptions"
                                     autoComplete="off"
@@ -87,6 +89,7 @@ const AddEvent = () => {
                                 <textarea
                                     required
                                     {...register('description', { required: true })}
+                                    placeholder="Description"
                                     className="block w-full px-4 pb-20 pt-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                 ></textarea>
 
@@ -97,6 +100,7 @@ const AddEvent = () => {
                                 <input
                                     required
                                     {...register('eventFee', { required: true, type: Number })}
+                                    placeholder="Event Fee"
                                     type="number"
                                     value={inputValue}
                                     onChange={(e) => {

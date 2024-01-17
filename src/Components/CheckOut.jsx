@@ -57,7 +57,7 @@ const CheckOut = () => {
 
     useEffect(() => {
         // Fetch service providers from your API
-        fetch("http://localhost:5000/users", {
+        fetch("https://asta-server-three.vercel.app/users", {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('access-token')}`
             }
@@ -73,7 +73,7 @@ const CheckOut = () => {
     //     queryKey: ['users'],
     //     queryFn: async () => {
     //         const res = await axiosSecure.get('/users')
-    //         console.log(res)
+    //         //console.log(res)
     //         return res
     //     }
     // })
@@ -204,10 +204,10 @@ const CheckOut = () => {
 
 
         const booking = { email, eventName, eventFee, img, description, eventType, serviceData };
-        console.log(booking);
+        //console.log(booking);
 
         // You can do something with the booking data here
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://asta-server-three.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -216,10 +216,10 @@ const CheckOut = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
+                // //console.log(data);
                 if (data.insertedId) {
                     toast.success('Event booked successfully')
-                    navigate('/events');
+                    navigate('/bookings');
                 }
             })
 

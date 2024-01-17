@@ -15,13 +15,13 @@ const SignUp = () => {
     const { createUser, updateUserProfile, loading } = useContext(AuthContext);
     const navigate = useNavigate();
     const onSubmit = (data) => {
-        console.log(data)
+        //console.log(data)
 
         createUser(data.email, data.password)
             .then(result => {
                 const newUser = result.user;
                 // toast.success('user signUp successfully')
-                console.log(newUser);
+                //console.log(newUser);
                 updateUserProfile(data.name)
                     .then(() => {
                         //create user entry in the database
@@ -32,16 +32,16 @@ const SignUp = () => {
                         axiosPublic.post('/users', userInfo)
                             .then(res => {
                                 if (res.data.insertedId) {
-                                    console.log('user added to the database')
+                                    //console.log('user added to the database')
                                     toast.success('user created successfully')
                                     reset();
                                     navigate('/');
                                 }
                             })
-                        // console.log('user profile updated')
+                        // //console.log('user profile updated')
                     })
                     .catch(error => {
-                        console.log(error)
+                        //console.log(error)
                         toast.error(error)
                     }
                     )
@@ -49,7 +49,7 @@ const SignUp = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode)
+                //console.log(errorCode)
                 toast.error(errorMessage)
             });
     }

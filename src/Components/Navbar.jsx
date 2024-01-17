@@ -29,13 +29,13 @@ const Navbar = () => {
         logOut()
             .then(result => {
                 toast.success("User LogOut Successfully")
-                console.log(result)
+                //console.log(result)
                 navigate('/');
             })
             .catch((error) => {
                 const errorCode = error.code
                 const errorMessage = error.message;
-                console.log(errorCode);
+                //console.log(errorCode);
                 toast.error(errorMessage)
 
             });
@@ -75,11 +75,12 @@ const Navbar = () => {
                                                         Admin Panel
                                                     </summary>
                                                     <ul className="p-2 bg-base-100 rounded-t-none">
-                                                        <li><NavLink to={'/addEvent'}>Add Event</NavLink></li>
-                                                        <li><NavLink to={'/allUsers'}>All Users</NavLink></li>
-                                                        <li><NavLink to={'/allEvents'}>All Events</NavLink></li>
-                                                        <li><NavLink to={'/allBookings'}>All Bookings</NavLink></li>
-                                                        <li><NavLink to={'/allOrders'}>All Orders</NavLink></li>
+                                                        <li><NavLink to={'/addEvent'} onClick={toggleMenu}>Add Event</NavLink></li>
+                                                        <li><NavLink to={'/allUsers'} onClick={toggleMenu}>All Users</NavLink></li>
+                                                        <li><NavLink to={'/allEvents'} onClick={toggleMenu}>All Events</NavLink></li>
+                                                        <li><NavLink to={'/allBookings'} onClick={toggleMenu}>All Bookings</NavLink></li>
+                                                        <li><NavLink to={'/allOrders'} onClick={toggleMenu}>All Orders</NavLink></li>
+                                                        <li><NavLink to={'/allPayments'} onClick={toggleMenu}>All Payments</NavLink></li>
                                                     </ul>
                                                 </details>
                                             </li>) :
@@ -141,6 +142,7 @@ const Navbar = () => {
                                                 <li><NavLink to={'/allEvents'}>All Events</NavLink></li>
                                                 <li><NavLink to={'/allBookings'}>All Bookings</NavLink></li>
                                                 <li><NavLink to={'/allOrders'}>All Orders</NavLink></li>
+                                                <li><NavLink to={'/allPayments'}>All Payments</NavLink></li>
                                             </ul>
                                         </details>
                                     </li>) :

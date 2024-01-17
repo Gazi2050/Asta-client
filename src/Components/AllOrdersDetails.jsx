@@ -17,7 +17,7 @@ const AllOrdersDetails = () => {
     });
     const { _id, eventName, eventFee, img, eventType, email, photographer, caterer, hotel, photographerType, catererType, hotelType, photographerFee, catererFee, hotelFee, guests, total, orderDate, orderTime, eventDate } = order;
 
-    console.log(order);
+    //console.log(order);
     const handleDeleteEvent = async (order) => {
         try {
             const result = await Swal.fire({
