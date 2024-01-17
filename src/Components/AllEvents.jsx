@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 const AllEvents = () => {
     const axiosSecure = useAxiosSecure();
     const { data: events = [], refetch, isLoading, isError } = useQuery({
@@ -61,6 +62,13 @@ const AllEvents = () => {
                             <div className="badge badge-outline">{event.eventType}</div>
                             <p><span className="font-bold">Event Fee :</span> {event.eventFee}</p>
                             <div className="card-actions justify-end">
+                                <Link to={`/allEvents/${event._id}`}>
+                                    <button
+                                        className="btn btn-sm md:btn-md lg:btn-md  text-white bg-orange-600 hover:text-orange-600 hover:bg-white"
+                                    >
+                                        Update
+                                    </button>
+                                </Link>
                                 <button
                                     onClick={() => handleDeleteEvent(event._id)}
                                     className="btn btn-sm md:btn-md lg:btn-md  text-white bg-red-600 hover:text-red-600 hover:bg-white"

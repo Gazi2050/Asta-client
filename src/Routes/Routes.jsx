@@ -29,6 +29,7 @@ import Payment from "../Components/Payment";
 import PaymentHistory from "../Components/PaymentHistory";
 import AllPaymentHistory from "../Components/AllPaymentHistory";
 import AllpaymentDetails from "../Components/AllpaymentDetails";
+import AllEventsDetails from "../Components/AllEventsDetails";
 
 export const router = createBrowserRouter([
 
@@ -126,6 +127,15 @@ export const router = createBrowserRouter([
             {
                 path: '/allEvents',
                 element: <PrivateRoute><AllEvents></AllEvents></PrivateRoute>,
+            },
+            {
+                path: '/allEvents/:id',
+                element: <PrivateRoute><AllEventsDetails></AllEventsDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`https://asta-server-three.vercel.app/allEvents/${params.id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+                }) //
             },
             {
                 path: '/allBookings',
