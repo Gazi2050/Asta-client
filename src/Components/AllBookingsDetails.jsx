@@ -42,7 +42,7 @@ const AllBookingsDetails = () => {
                 }
             }
         } catch (error) {
-            console.error("Error deleting event", error);
+            console.error("Error deleting booking", error);
             // Handle error as needed
         }
     };

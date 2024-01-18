@@ -1,11 +1,13 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const AllpaymentDetails = () => {
     const payment = useLoaderData();
+    const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
-    const { data: payments = [] } = useQuery({
+    const { data: payments = [], refetch } = useQuery({
         queryKey: ['allPayments'],
         queryFn: async () => {
             const res = await axiosSecure.get('/allPayments');
@@ -19,6 +21,36 @@ const AllpaymentDetails = () => {
     const formatDate = (dateString) => {
         const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
         return new Date(dateString).toLocaleString(undefined, options);
+    };
+
+    const handleDeletePaymentHistory = async (payment) => {
+        try {
+            const result = await Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, remove it!",
+            });
+
+            if (result.isConfirmed) {
+                const res = await axiosSecure.delete(`/allPayments/${payment}`);
+                if (res.data.deletedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Payment History has been removed.",
+                        icon: "success",
+                    });
+                    navigate('/allPayments');
+                }
+            }
+        } catch (error) {
+            console.error("Error deleting payment history", error);
+            // Handle error as needed
+        }
     };
 
     return (
@@ -51,7 +83,9 @@ const AllpaymentDetails = () => {
 
                         </div>
                     </div>
-
+                    <div className="flex justify-center mt-2">
+                        <button onClick={() => handleDeletePaymentHistory(payment._id)} className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">Event completed</button>
+                    </div>
                 </div>
             </div>
         </div>

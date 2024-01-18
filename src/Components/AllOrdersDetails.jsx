@@ -43,7 +43,7 @@ const AllOrdersDetails = () => {
                 }
             }
         } catch (error) {
-            console.error("Error deleting event", error);
+            console.error("Error deleting order", error);
             // Handle error as needed
         }
     };
@@ -90,7 +90,7 @@ const AllOrdersDetails = () => {
                         </div>
                     </div>
                     <div className="flex justify-center mt-2">
-                        <button onClick={() => handleDeleteEvent(order._id)} className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">Cancel Booking</button>
+                        <button onClick={() => handleDeleteEvent(order._id)} className="btn btn-sm md:btn-md lg:btn-md text-white bg-red-600 hover:text-red-600 hover:bg-white">Cancel Order</button>
                     </div>
                 </div>
             </div>
