@@ -2,28 +2,39 @@
 
 const ContactUs = () => {
     return (
-        <div>
-            <section className="p-6 bg-orange-600 dark:bg-gray-800 dark:text-gray-100">
-                <div className="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-5">
-                    <div className="w-full px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2 dark:bg-gray-900">
-                        <span className="block mb-2 text-3xl font-semibold dark:text-violet-400">Have a Question? We're Here to Help!</span>
-                        <p className="my-8">
-                            Your input is important to us! If you have any questions, queries, or suggestions, please don't hesitate to reach out.
-                        </p>
-                        <form className="self-stretch space-y-3">
-                            <div>
-                                <input type="text" placeholder="email" className="input input-bordered w-full max-w-xs" />
-                            </div>
-                            <div>
-                                <textarea className="textarea textarea-bordered w-full" placeholder="Type here"></textarea>
-                            </div>
-                            <button type="button" className="btn hover:bg-black hover:text-white border-0">Submit</button>
-                        </form>
+        <div className="bg-orange-600 py-10 space-y-10 ">
+            <div className="text-white text-center space-y-3">
+                <h1 className="text-3xl lg:text-4xl font-bold">Have a Question? We're Here to Help!</h1>
+                <p className="font-semibold">Your input is important to us! If you have any questions, queries, or suggestions, please don't hesitate to reach out.</p>
+            </div>
+            <div className="w-full px-8 py-10 mx-auto overflow-hidden bg-black rounded-lg shadow-2xl dark:bg-gray-900 lg:max-w-xl">
+                <form className="mt-6">
+                    <div className="flex-1 mt-6">
+                        <label className="block mb-2 text-sm text-white dark:text-gray-200">Email address</label>
+                        <input
+                            type="email"
+                            placeholder="abc@example.com"
+                            className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
                     </div>
-                    <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29udGFjdCUyMHVzfGVufDB8fDB8fHww" alt="" className="hidden lg:block object-cover w-full rounded-md xl:col-span-3 dark:bg-gray-500" />
-                </div>
-            </section>
+                    <div className="w-full mt-6">
+                        <label className="block mb-2 text-sm text-white dark:text-gray-200">Message</label>
+                        <textarea
+                            className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-48 dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-yellow-300 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                            placeholder="Message"
+                        ></textarea>
+                    </div>
+                    <div className="flex justify-center">
+                        <button
+                            className="btn btn-sm sm:btn-sm md:btn-md lg:btn bg-orange-600 text-white lg:bg-orange-600 lg:text-white hover:bg-white hover:text-orange-600 md:bg-orange-600 md:text-white mt-4"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
+
     );
 };
 

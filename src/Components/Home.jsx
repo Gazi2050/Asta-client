@@ -6,6 +6,7 @@ import ContactUs from "./ContactUs";
 import Collaborate from "./Collaborate";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import Subscribe from "./Subscribe";
 
 const Home = () => {
     const { user } = useContext(AuthContext);
@@ -19,6 +20,7 @@ const Home = () => {
             <Featured />
             <Collaborate />
             <ContactUs />
+            <Subscribe />
         </div>
     );
 };

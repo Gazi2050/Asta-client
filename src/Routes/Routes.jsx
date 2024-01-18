@@ -30,6 +30,8 @@ import PaymentHistory from "../Components/PaymentHistory";
 import AllPaymentHistory from "../Components/AllPaymentHistory";
 import AllpaymentDetails from "../Components/AllpaymentDetails";
 import AllEventsDetails from "../Components/AllEventsDetails";
+import Inbox from "../Components/Inbox";
+import InboxDetails from "../Components/InboxDetails";
 
 export const router = createBrowserRouter([
 
@@ -176,6 +178,14 @@ export const router = createBrowserRouter([
                     }
                 }) //
             },
+            {
+                path: '/inbox',
+                element: <PrivateRoute><Inbox></Inbox></PrivateRoute>
+            },
+            {
+                path: '/inbox/:id',
+                element: <PrivateRoute><InboxDetails></InboxDetails></PrivateRoute>
+            }
         ]
     },
 ]);

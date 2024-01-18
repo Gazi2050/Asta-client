@@ -81,6 +81,7 @@ const Navbar = () => {
                                                         <li><NavLink to={'/allBookings'} onClick={toggleMenu}>All Bookings</NavLink></li>
                                                         <li><NavLink to={'/allOrders'} onClick={toggleMenu}>All Orders</NavLink></li>
                                                         <li><NavLink to={'/allPayments'} onClick={toggleMenu}>All Payments</NavLink></li>
+                                                        <li><NavLink to={'/inbox'} onClick={toggleMenu}>Inbox</NavLink></li>
                                                     </ul>
                                                 </details>
                                             </li>) :
@@ -143,6 +144,7 @@ const Navbar = () => {
                                                 <li><NavLink to={'/allBookings'}>All Bookings</NavLink></li>
                                                 <li><NavLink to={'/allOrders'}>All Orders</NavLink></li>
                                                 <li><NavLink to={'/allPayments'}>All Payments</NavLink></li>
+                                                <li><NavLink to={'/inbox'}>Inbox</NavLink></li>
                                             </ul>
                                         </details>
                                     </li>) :
