@@ -2,12 +2,22 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 const AllEventsDetails = () => {
     const event = useLoaderData();
     const [inputValue, setInputValue] = useState();
     const navigate = useNavigate();
+    const axiosSecure = useAxiosSecure();
+    const { data: events = [] } = useQuery({
+        queryKey: ['allEvents'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/allEvents');
+            return res.data;
+        }
+    });
     const { _id, eventName, eventFee, eventType, description } = event;
 
     const handleUpdateJob = async (event) => {
@@ -27,16 +37,10 @@ const AllEventsDetails = () => {
                 eventFee
             };
 
-            const response = await fetch(`https://asta-server-three.vercel.app/allEvents/${_id}`, {
-                method: 'PUT',
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `Bearer ${localStorage.getItem('access-token')}`
-                },
-                body: JSON.stringify(UpdateJob)
-            });
+            // Use axiosSecure for making the request
+            const response = await axiosSecure.put(`/allEvents/${_id}`, UpdateJob);
 
-            const data = await response.json();
+            const data = await response.data;
 
             console.log(data);
             if (data.modifiedCount) {
@@ -52,7 +56,6 @@ const AllEventsDetails = () => {
         }
     };
 
-
     return (
         <div className="pt-20">
             <Helmet>
@@ -66,7 +69,7 @@ const AllEventsDetails = () => {
                     <form onSubmit={handleUpdateJob}>
                         <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                             <div>
-                                <label className="text-gray-700 dark:text-gray-200" >Event Name</label>
+                                <label className="text-gray-700 dark:text-gray-200">Event Name</label>
                                 <input
                                     defaultValue={eventName}
                                     name="eventName"
@@ -76,7 +79,7 @@ const AllEventsDetails = () => {
                                 />
                             </div>
                             <div>
-                                <label className="text-gray-700 dark:text-gray-200" >Event Type</label>
+                                <label className="text-gray-700 dark:text-gray-200">Event Type</label>
                                 <input
                                     defaultValue={eventType}
                                     name="eventType"
@@ -103,11 +106,10 @@ const AllEventsDetails = () => {
                                     placeholder="Description"
                                     className="block w-full px-4 pb-20 pt-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                 ></textarea>
-
                             </div>
 
                             <div>
-                                <label className="text-gray-700 dark:text-gray-200" >Event Fee</label>
+                                <label className="text-gray-700 dark:text-gray-200">Event Fee</label>
                                 <input
                                     defaultValue={eventFee}
                                     name="eventFee"
