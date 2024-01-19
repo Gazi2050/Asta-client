@@ -27,6 +27,7 @@ const Bookings = () => {
             </Helmet>
             <div>
                 <h1 className="text-orange-600 text-xl lg:text-4xl md:text-3xl text-center font-bold p-10">Your Bookings</h1>
+                <p className="text-lg font-bold text-center">Bookings: {bookings.length}</p>
             </div>
             <div className="grid-cols-1 p-2 lg:p-10">
                 {

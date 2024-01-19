@@ -184,7 +184,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/inbox/:id',
-                element: <PrivateRoute><InboxDetails></InboxDetails></PrivateRoute>
+                element: <PrivateRoute><InboxDetails></InboxDetails></PrivateRoute>,
+                loader: ({ params }) => fetch(`https://asta-server-three.vercel.app/inbox/${params.id}`, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('access-token')}`
+                    }
+                })
             }
         ]
     },

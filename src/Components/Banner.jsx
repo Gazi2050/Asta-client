@@ -9,7 +9,7 @@ const Banner = () => {
                     <div className="max-w-md space-y-4">
                         <h1 className="text-3xl lg:text-5xl pt-20 font-bold text-orange-500">Celebrate Uniquely</h1>
                         <p className="mb-5">Crafting Moments, Creating Memories. Immerse in seamless planning and unmatched creativity. Your vision, our expertise – let's make it extraordinary at Asta Events.</p>
-                        <Link to={'/logIn'} className="btn bg-orange-600 border-0 text-white hover:bg-black">
+                        <Link to={'/events'} className="btn bg-orange-600 border-0 text-white hover:bg-black">
                             <button>Get Started</button>
                         </Link>
                     </div>
