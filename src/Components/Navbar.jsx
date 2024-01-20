@@ -69,22 +69,25 @@ const Navbar = () => {
                                         <li><NavLink to={'/orders'} onClick={toggleMenu}>Orders</NavLink></li>
                                         <li><NavLink to={'/paymentHistory'} onClick={toggleMenu}>Payment History</NavLink></li>
                                         {isAdmin ?
-                                            (<li>
-                                                <details>
-                                                    <summary className="font-bold text-orange-600">
-                                                        Admin Panel
-                                                    </summary>
-                                                    <ul className="p-2 bg-base-100 rounded-t-none">
-                                                        <li><NavLink to={'/addEvent'} onClick={toggleMenu}>Add Event</NavLink></li>
-                                                        <li><NavLink to={'/allUsers'} onClick={toggleMenu}>All Users</NavLink></li>
-                                                        <li><NavLink to={'/allEvents'} onClick={toggleMenu}>All Events</NavLink></li>
-                                                        <li><NavLink to={'/allBookings'} onClick={toggleMenu}>All Bookings</NavLink></li>
-                                                        <li><NavLink to={'/allOrders'} onClick={toggleMenu}>All Orders</NavLink></li>
-                                                        <li><NavLink to={'/allPayments'} onClick={toggleMenu}>All Payments</NavLink></li>
-                                                        <li><NavLink to={'/inbox'} onClick={toggleMenu}>Inbox</NavLink></li>
-                                                    </ul>
-                                                </details>
-                                            </li>) :
+                                            (<>
+                                                <li>
+                                                    <details>
+                                                        <summary className="font-bold text-orange-600">
+                                                            Admin Panel
+                                                        </summary>
+                                                        <ul className="p-2 bg-base-100 rounded-t-none">
+                                                            <li><NavLink to={'/addEvent'} onClick={toggleMenu}>Add Event</NavLink></li>
+                                                            <li><NavLink to={'/allUsers'} onClick={toggleMenu}>All Users</NavLink></li>
+                                                            <li><NavLink to={'/allEvents'} onClick={toggleMenu}>All Events</NavLink></li>
+                                                            <li><NavLink to={'/allBookings'} onClick={toggleMenu}>All Bookings</NavLink></li>
+                                                            <li><NavLink to={'/allOrders'} onClick={toggleMenu}>All Orders</NavLink></li>
+                                                            <li><NavLink to={'/allPayments'} onClick={toggleMenu}>All Payments</NavLink></li>
+                                                            <li><NavLink to={'/inbox'} onClick={toggleMenu}>Inbox</NavLink></li>
+                                                        </ul>
+                                                    </details>
+                                                </li>
+                                                <li><NavLink to={'/userAnalytics'} onClick={toggleMenu}>Analytics</NavLink></li>
+                                            </>) :
                                             null}
                                     </>)
                                     :
@@ -132,22 +135,25 @@ const Navbar = () => {
                                 <li><NavLink to={'/orders'}>Orders</NavLink></li>
                                 <li><NavLink to={'/paymentHistory'}>Payment History</NavLink></li>
                                 {isAdmin ?
-                                    (<li>
-                                        <details>
-                                            <summary className="font-bold text-orange-600">
-                                                Admin Panel
-                                            </summary>
-                                            <ul className="p-2 bg-base-100 rounded-t-none">
-                                                <li><NavLink to={'/addEvent'}>Add Event</NavLink></li>
-                                                <li><NavLink to={'/allUsers'}>All Users</NavLink></li>
-                                                <li><NavLink to={'/allEvents'}>All Events</NavLink></li>
-                                                <li><NavLink to={'/allBookings'}>All Bookings</NavLink></li>
-                                                <li><NavLink to={'/allOrders'}>All Orders</NavLink></li>
-                                                <li><NavLink to={'/allPayments'}>All Payments</NavLink></li>
-                                                <li><NavLink to={'/inbox'}>Inbox</NavLink></li>
-                                            </ul>
-                                        </details>
-                                    </li>) :
+                                    (<>
+                                        <li>
+                                            <details>
+                                                <summary className="font-bold text-orange-600">
+                                                    Admin Panel
+                                                </summary>
+                                                <ul className="p-2 bg-base-100 rounded-t-none">
+                                                    <li><NavLink to={'/addEvent'}>Add Event</NavLink></li>
+                                                    <li><NavLink to={'/allUsers'}>All Users</NavLink></li>
+                                                    <li><NavLink to={'/allEvents'}>All Events</NavLink></li>
+                                                    <li><NavLink to={'/allBookings'}>All Bookings</NavLink></li>
+                                                    <li><NavLink to={'/allOrders'}>All Orders</NavLink></li>
+                                                    <li><NavLink to={'/allPayments'}>All Payments</NavLink></li>
+                                                    <li><NavLink to={'/inbox'}>Inbox</NavLink></li>
+                                                </ul>
+                                            </details>
+                                        </li>
+                                        <li><NavLink to={'/userAnalytics'} >Analytics</NavLink></li>
+                                    </>) :
                                     null}
                             </>)
                             :

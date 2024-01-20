@@ -32,6 +32,7 @@ import AllpaymentDetails from "../Components/AllpaymentDetails";
 import AllEventsDetails from "../Components/AllEventsDetails";
 import Inbox from "../Components/Inbox";
 import InboxDetails from "../Components/InboxDetails";
+import UserAnalytics from "../Components/UserAnalytics";
 
 export const router = createBrowserRouter([
 
@@ -190,7 +191,11 @@ export const router = createBrowserRouter([
                         authorization: `Bearer ${localStorage.getItem('access-token')}`
                     }
                 })
-            }
+            },
+            {
+                path: '/userAnalytics',
+                element: <PrivateRoute><UserAnalytics></UserAnalytics></PrivateRoute>
+            },
         ]
     },
 ]);
