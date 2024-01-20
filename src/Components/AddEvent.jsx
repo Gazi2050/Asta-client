@@ -27,7 +27,7 @@ const AddEvent = () => {
             const eventItem = {
                 eventName: data.eventName,
                 eventType: data.eventType,
-                eventFee: parseFloat(data.eventFee),
+                eventFee: parseInt(data.eventFee),
                 description: data.description,
                 img: res.data.data.display_url
             }

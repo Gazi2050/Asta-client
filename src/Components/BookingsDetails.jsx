@@ -16,7 +16,6 @@ const BookingsDetails = () => {
     const cateringFee = Math.max(0, inputValue * serviceData.serviceFee_C);
     const hotelFee = Math.max(0, Math.ceil(inputValue / 2) * serviceData.serviceFee_H);
     const total = eventFee + serviceData.serviceFee_P + cateringFee + hotelFee;
-
     const isOrderButtonDisabled = inputValue <= 0 || !eventDate;
 
 

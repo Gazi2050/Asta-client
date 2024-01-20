@@ -5,7 +5,6 @@ import { useState } from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
-
 const AllEventsDetails = () => {
     const event = useLoaderData();
     const [inputValue, setInputValue] = useState();
@@ -27,7 +26,8 @@ const AllEventsDetails = () => {
         const eventName = form.eventName.value;
         const eventType = form.eventType.value;
         const description = form.description.value;
-        const eventFee = form.eventFee.value;
+
+        const eventFee = inputValue;
 
         try {
             const UpdateJob = {
@@ -37,9 +37,7 @@ const AllEventsDetails = () => {
                 eventFee
             };
 
-            // Use axiosSecure for making the request
             const response = await axiosSecure.put(`/allEvents/${_id}`, UpdateJob);
-
             const data = await response.data;
 
             console.log(data);
@@ -51,7 +49,6 @@ const AllEventsDetails = () => {
             }
         } catch (error) {
             console.error('Error updating event:', error);
-            // Handle error, show error message, etc.
             toast.error('Error updating event');
         }
     };
@@ -64,7 +61,7 @@ const AllEventsDetails = () => {
             <div className="py-6 bg-slate-800 ">
                 <section className="max-w-4xl p-6 mx-auto bg-orange-50 rounded-md shadow-md dark:bg-gray-800 tex">
                     <div className="text-center">
-                        <span className="text-xl font-semibold text-orange-600  dark:text-white text-center border-2 p-2 rounded-md border-orange-400">Update Event</span>
+                        <span className="text-xl font-semibold text-orange-600 dark:text-white text-center border-2 p-2 rounded-md border-orange-400">Update Event</span>
                     </div>
                     <form onSubmit={handleUpdateJob}>
                         <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
@@ -97,7 +94,6 @@ const AllEventsDetails = () => {
                                     <option value="Anniversaries" />
                                 </datalist>
                             </div>
-
                             <div className="lg:col-span-2 md:col-span-2">
                                 <label className="text-gray-700 dark:text-gray-200">Description</label>
                                 <textarea
@@ -107,7 +103,6 @@ const AllEventsDetails = () => {
                                     className="block w-full px-4 pb-20 pt-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
                                 ></textarea>
                             </div>
-
                             <div>
                                 <label className="text-gray-700 dark:text-gray-200">Event Fee</label>
                                 <input
@@ -125,7 +120,7 @@ const AllEventsDetails = () => {
                             </div>
                         </div>
                         <div className="flex justify-end mt-6">
-                            <button type="submit" className="btn btn-sm md:btn-md lg:btn-md  text-white bg-orange-600 hover:text-orange-600 hover:bg-white">Update</button>
+                            <button type="submit" className="btn btn-sm md:btn-md lg:btn-md text-white bg-orange-600 hover:text-orange-600 hover:bg-white">Update</button>
                         </div>
                         <Toaster />
                     </form>

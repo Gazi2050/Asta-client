@@ -20,6 +20,8 @@ const Orders = () => {
             .then(data => setOrders(data))
     }, [url])
 
+    const total = orders.filter(order => order.total !== undefined).reduce((acc, order) => acc + order.total, 0);
+
 
     return (
         <div className="pt-20">
@@ -31,7 +33,7 @@ const Orders = () => {
                 <p className="text-lg font-bold text-center pb-5">Orders: {orders.length}</p>
                 <div className="flex justify-center space-x-4">
                     <div>
-                        <p className="text-lg font-bold text-center">Total Fee: $ {orders.total}</p>
+                        <p className="text-lg font-bold text-center">Total Fee: $ {total}</p>
                     </div>
                     <div className="flex justify-center mb-2 lg:-mt-3 md:-mt-3">
                         {orders.length ?

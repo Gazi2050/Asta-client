@@ -32,7 +32,7 @@ const OrderDetails = () => {
                             Swal.fire('Canceled!', 'Your order has been canceled.', 'success');
                             const remaining = orders.filter((order) => order._id !== id);
                             setOrders(remaining);
-                            navigate('/bookings');
+                            navigate('/orders');
                         }
                     })
                     .catch((error) => {
