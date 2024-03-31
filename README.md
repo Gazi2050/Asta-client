@@ -16,7 +16,7 @@ Welcome to Asta, your premier event management platform offering comprehensive s
 ## Usage
 
 1. **Navigate to the Website**:
-   Visit <a href="https://asta-185de.web.app/" target="_blank">Asta Event Management Website</a> to get started.
+   Visit [Asta Event Management Website](https://asta-185de.web.app/) to get started.
 
 2. **Sign Up or Log In**:
    Use your Google ID or email and password to access the platform's features.
