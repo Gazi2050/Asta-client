@@ -36,14 +36,6 @@ Welcome to Asta, your premier event management platform offering comprehensive s
 7. **Admin Panel**:
    Admins can access the admin panel to manage events, users, bookings, orders, and payments efficiently.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For inquiries or support, please contact us at [contact@asta.com](mailto:contact@asta.com).
-
 ---
 
 Feel free to modify and expand upon this README to include more details about your project's architecture, technology stack, deployment process, or any other relevant information.
